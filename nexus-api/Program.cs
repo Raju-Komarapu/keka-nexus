@@ -13,7 +13,7 @@ container.Options.SuppressLifestyleMismatchVerification = true;
 builder.Services.AddControllerConfiguration()
                 .AddSimpleInjector(container)
                 .AddAutomapperConfig()
-                .AddAuthenticationDetails();
+                .AddAuthenticationDetails(container);
 
 builder.Services.AddCors(options =>
 {
