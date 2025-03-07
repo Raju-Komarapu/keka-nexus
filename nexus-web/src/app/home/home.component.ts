@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ContextService } from '../context/context-service';
 import { TopNavComponent } from '../shared/components/top-nav/top-nav.component';
-import { NotificationService } from '../shared/services/notification.service';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +12,11 @@ import { NotificationService } from '../shared/services/notification.service';
 })
 export class HomeComponent implements OnInit {
     constructor(private contextService: ContextService,
-                private notificationService: NotificationService) {}
+                private authService: AuthService) {}
     
     ngOnInit(): void {
-      this.contextService.initialize();
+       if (this.authService.hasToken()) {
+           this.contextService.initialize();
+       }
     }
 }

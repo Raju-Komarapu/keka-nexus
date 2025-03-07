@@ -8,18 +8,20 @@ import { ProfileComponent } from './home/profile/profile.component';
 import { authGuard } from './auth/route-guards/auth-guard';
 import { AllJobsComponent } from './shared/components/all-jobs/all-jobs.component';
 import { JobComponent } from './home/job/job.component';
+import { LogoutComponent } from './auth/components/logout/logout.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'home', component: HomeComponent, canActivate: [authGuard],
+    { path: 'logout', component: LogoutComponent },
+    { path: 'home', component: HomeComponent,
       children: [
             { 
                 path: '', component: AllJobsComponent
             },
             {
-                path: 'profile', component: ProfileComponent
+                path: 'profile', component: ProfileComponent, canActivate: [authGuard]
             },
             {
                 path: 'job', component: JobComponent

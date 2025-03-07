@@ -76,7 +76,7 @@ export class JobComponent {
     const config = {
         backdrop: true,
         ignoreBackdropClick: true, // Do not close the modal when clicking outside
-        class: 'modal-right' // Example to make the modal large
+        class: 'modal-right right-modal-600' // Example to make the modal large
       };
     this.ModalService.show(AIChatbotComponent, config);
   }

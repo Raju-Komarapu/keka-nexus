@@ -37,6 +37,8 @@ export class AuthService {
         return !!this.getToken();
     }
 
+    isLoggedIn = () => this.hasToken();
+
     login(loginModal: Login): Observable<AuthResponse> {
         return this.httpClient.post<AuthResponse>(`${this.apiUrl}/login`, loginModal);
     }

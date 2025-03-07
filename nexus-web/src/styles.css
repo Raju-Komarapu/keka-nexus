@@ -27,3 +27,14 @@ body {
 .primary-bg-purple {
     background-color: #5746AF;
 }
+
+.modal .modal-right {
+    height: 100vh;
+    margin: 0;
+    float: right;
+}
+
+.right-modal-600 {
+    width: 600px;
+    min-width: 600px;
+}

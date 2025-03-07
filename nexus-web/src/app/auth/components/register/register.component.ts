@@ -73,6 +73,7 @@ export class RegisterComponent implements OnInit {
     register() {
         this.isFormSubmitted = true;
         const registerModal = new Register(this.registerForm.value);
+        registerModal.phone = registerModal.phone.toString();
         this.isInProgress = true;
         this.authService.register(registerModal).subscribe({
             next: (response: AuthResponse) => {
