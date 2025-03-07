@@ -4,7 +4,6 @@ using Microsoft.IdentityModel.Tokens;
 using Nexus.Application.DTO;
 using Nexus.Application.Services.Interfaces;
 using Nexus.Core.Models;
-using Nexus.Core.Models.Authentication;
 using Nexus.Core.Repositories;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

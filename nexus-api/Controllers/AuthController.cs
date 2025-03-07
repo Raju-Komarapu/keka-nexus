@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Nexus.Application.DTO;
 using Nexus.Application.Services.Interfaces;
-using Nexus.Core.Models.Authentication;
+using Nexus.Core.Models;
 
 namespace nexus_api.Controllers;
 

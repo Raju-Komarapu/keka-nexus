@@ -50,7 +50,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddAuthenticationDetails(this IServiceCollection services, Container container)
     {
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer("Authentication", options =>
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
         {
             options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
             {
