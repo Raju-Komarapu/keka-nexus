@@ -4,14 +4,20 @@ using Nexus.Application.Services.Interfaces;
 
 namespace Nexus.WebAPI.Controllers;
 
-[ApiController]
 [Route("api/candidateprofile")]
-public class CandidateProfileController(ICandidateProfileService candidateProfileService)
+public class CandidateProfileController(
+    ICandidateProfileService candidateProfileService)
     : BaseController
 {
-    [HttpPut]
-    public bool UpdateCandidateProfile(CandidateProfileDto candidateProfile)
+    [HttpGet("me")]
+    public CandidateProfileDto GetCandidate()
     {
-        return candidateProfileService.UpdateCandidateProfile(candidateProfile);
+        return candidateProfileService.GetCandidateProfile();
+    }
+
+    [HttpPut("{id}")]
+    public bool UpdateCandidateProfile([FromRoute] int id ,[FromBody] CandidateProfileDto candidateProfile)
+    {
+        return candidateProfileService.UpdateCandidateProfile(id, candidateProfile);
     }
 }

@@ -7,5 +7,7 @@ public interface IUserRepository
 
     User GetUserById(int id);
 
+    User GetUserByIdentifier(string identifier);
+
     User GetUserByEmail(string email);
 }

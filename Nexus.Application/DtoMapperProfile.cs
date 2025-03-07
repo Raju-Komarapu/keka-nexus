@@ -13,6 +13,7 @@ public class DtoMapperProfile: Profile
 
         this.CreateMap<RegisterDTO, CandidateProfile>();
 
-        this.CreateMap<CandidateProfileDto, CandidateProfile>();
+        this.CreateMap<CandidateProfileDto, CandidateProfile>()
+            .ReverseMap();
     }
 }

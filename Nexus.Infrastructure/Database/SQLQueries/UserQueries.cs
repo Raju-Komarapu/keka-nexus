@@ -5,6 +5,10 @@ internal static class UserQueries
     SELECT * FROM Users
     WHERE Id = @UserId";
 
+    public const string GetByIdentifier = @"
+    SELECT * FROM Users
+    WHERE Identifier = @Identifier";
+
     public const string GetByEmail = @"
     SELECT * FROM Users
     WHERE Username = @Email";

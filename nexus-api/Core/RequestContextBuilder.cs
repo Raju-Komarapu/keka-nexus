@@ -1,25 +1,41 @@
-﻿using Nexus.Core.Models;
+﻿using Nexus.Application.Services;
+using Nexus.Core.Models;
+using System.Security.Claims;
 
 namespace Nexus.WebAPI.Core;
 
 public class RequestContextBuilder
 {
-    public RequestContextBuilder(IHttpContextAccessor httpContextAccessor)
+    public IHttpContextAccessor HttpContextAccessor { get; }
+
+    public ContextService ContextService { get; }
+
+    public RequestContextBuilder(
+        IHttpContextAccessor httpContextAccessor, 
+        ContextService contextService)
     {
         this.HttpContextAccessor = httpContextAccessor;
+        this.ContextService = contextService;
     }
-
-    public IHttpContextAccessor HttpContextAccessor { get; }
 
     public IRequestContext Build()
     {
-        var k = this.HttpContextAccessor;
-        return new RequestContext()
+        var identity = this.HttpContextAccessor?.HttpContext?.User?.Identity as ClaimsIdentity;
+        if (identity?.IsAuthenticated ?? false)
         {
-            UserId = 1,
-            UserName = "user",
-            Password = "password",
-            Token = "token"
-        };
+            var user = this.ContextService.GetUserByIdentifier(identity?.Claims?.SingleOrDefault(c => c.Type == "UserIdentifier")?.Value);
+
+            return new RequestContext()
+            {
+                UserId = user.Id,
+                Email = user.Username,
+                UserIdentifier = user.Identifier,
+                ProfileId = user.ProfileId,
+            };
+        }
+
+        this.HttpContextAccessor.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        this.HttpContextAccessor.HttpContext.Response.HttpContext.Abort();
+        return null;
     }
 }
