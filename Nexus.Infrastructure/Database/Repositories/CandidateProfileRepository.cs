@@ -14,6 +14,12 @@ public class CandidateProfileRepository(DatabaseContext Db, IMapper mapper) : Ba
         return this.Db.Connection.ExecuteScalar<int>(CandidateProfileQueries.InsertCandidateProfile, dbCandidateProfile);
     }
 
+    public CandidateProfile? GetCandidateProfileByEmail(string email)
+    {
+        var candidateProfile = this.Db.Connection.QuerySingleOrDefault<DbCandidateProfile>(CandidateProfileQueries.GetProfilebyEmail, new { Email = email });
+        return candidateProfile is not null ? this.Mapper.Map<CandidateProfile>(candidateProfile) : null;
+    }
+
     public bool UpdateCandidateProfile(CandidateProfile candidateProfile)
     {
         var dbCandidateProfile = this.Mapper.Map<DbCandidateProfile>(candidateProfile);

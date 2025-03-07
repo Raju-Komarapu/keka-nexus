@@ -1,10 +1,11 @@
 ﻿using Nexus.Application.DTO;
+using Nexus.Core.Models.Authentication;
 
 namespace Nexus.Application.Services.Interfaces;
 public interface IAuthService
 {
-    string Login(LoginDTO login);
+    AuthResponse Login(LoginDTO login);
 
-    string Register(RegisterDTO register);
+    AuthResponse Register(RegisterDTO register);
 
 }

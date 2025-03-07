@@ -10,7 +10,7 @@ import { Register } from '../models/register';
 })
 export class AuthService {
 
-    private apiUrl: string = '/auth'
+    private apiUrl: string = '/api/auth'
     private TOKEN_KEY = 'auth_token';
 
     constructor(private router: Router, private httpClient: HttpClient) { }

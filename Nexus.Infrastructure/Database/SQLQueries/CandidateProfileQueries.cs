@@ -40,4 +40,9 @@ internal static class CandidateProfileQueries
 		        ELSE 0 
         END
     ";
+
+    public const string GetProfilebyEmail = @"
+        SELECT * FROM [CandidateProfile]
+        WHERE Email  = @Email
+    ";
 }

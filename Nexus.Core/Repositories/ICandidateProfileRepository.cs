@@ -8,4 +8,6 @@ public interface ICandidateProfileRepository
     bool UpdateCandidateProfile(CandidateProfile candidateProfile);
 
     bool DoesCandidateExist(int  candidateProfileId);
+
+    CandidateProfile? GetCandidateProfileByEmail(string email);
 }

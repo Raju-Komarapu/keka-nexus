@@ -11,18 +11,20 @@ public class UserRepository(DatabaseContext db, IMapper mapper) : BaseRepository
     public int AddUser(User user)
     {
         var userDataModel = this.Mapper.Map<DbUser>(user);
-        throw new NotImplementedException();
+        userDataModel.CreatedOn = DateTime.UtcNow;
+        userDataModel.ModifiedOn = DateTime.UtcNow;
+        return this.Db.Connection.ExecuteScalar<int>(UserQueries.InsertUser, userDataModel);
     }
 
     public User GetUserById(int id)
     {
-        var user = this.Db.Connection.Query<DbUser>(UserQueries.GetById, new { UserId = id });
-        return this.Mapper.Map<User>(user);
+        var user = this.Db.Connection.QuerySingleOrDefault<DbUser>(UserQueries.GetById, new { UserId = id });
+        return user is not null ? this.Mapper.Map<User>(user) : null;
     }
 
     public User GetUserByEmail(string email)
     {
-        var user = this.Db.Connection.Query<DbUser>(UserQueries.GetByEmail, new { Email = email });
-        return this.Mapper.Map<User>(user);
+        var user = this.Db.Connection.QuerySingleOrDefault<DbUser>(UserQueries.GetByEmail, new { Email = email });
+        return user is not null ? this.Mapper.Map<User>(user) : null;
     }
 }

@@ -8,7 +8,12 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const baseUrl = 'https://localhost:7229';
     const token = this.authService.getToken();
+    console.log(request)
+    if (request.url.startsWith("/")) {
+        request = request.clone({ url: `${baseUrl}${request.url}`})   
+    }
 
     if (token) {
         request = request.clone({
