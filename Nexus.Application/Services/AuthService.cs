@@ -1,4 +1,5 @@
-﻿using Nexus.Application.DTO;
+﻿using AutoMapper;
+using Nexus.Application.DTO;
 using Nexus.Application.Services.Interfaces;
 using Nexus.Core.Models;
 using Nexus.Core.Repositories;
@@ -6,12 +7,13 @@ using Nexus.Core.Repositories;
 namespace Nexus.Application.Services;
 public class AuthService : IAuthService
 {
-    public IRequestContext RequestContext { get; set; }
+    public IMapper Mapper { get; set; }
 
     public IUserRepository UserRepository { get; set; }
 
-    public AuthService(IRequestContext context, IUserRepository userRepository)
+    public AuthService(IMapper mapper, IUserRepository userRepository)
     {
+        this.Mapper = mapper;
         this.UserRepository = userRepository;
     }
 
@@ -22,6 +24,8 @@ public class AuthService : IAuthService
 
     public string Register(RegisterDTO register)
     {
+        var user = this.Mapper.Map<User>(register);
+        this.UserRepository.AddUser(user);
         throw new NotImplementedException();
     }
 

@@ -3,5 +3,5 @@
 namespace Nexus.Core.Repositories;
 public interface IUserRepository
 {
-    bool AddUser(User user);
+    long AddUser(User user);
 }
