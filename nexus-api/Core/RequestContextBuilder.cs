@@ -16,15 +16,22 @@ public class RequestContextBuilder
 
     public IRequestContext Build()
     {
-        var identity = this.HttpContextAccessor.HttpContext.User.Identities as ClaimsIdentity;
-        this.ContextService.GetUserByIdentifier(identity?.Claims?.SingleOrDefault(c => c.Type == "UserIdentifier")?.Value);
-        var k = this.HttpContextAccessor;
-        return new RequestContext()
+        var identity = this.HttpContextAccessor?.HttpContext?.User?.Identity as ClaimsIdentity;
+        if (identity?.IsAuthenticated ?? false)
         {
-            UserId = 1,
-            UserName = "user",
-            Password = "password",
-            Token = "token"
-        };
+            var user = this.ContextService.GetUserByIdentifier(identity?.Claims?.SingleOrDefault(c => c.Type == "UserIdentifier")?.Value);
+            var k = this.HttpContextAccessor;
+            return new RequestContext()
+            {
+                UserId = user.Id,
+                Email = user.Username,
+                UserIdentifier = user.Identifier,
+                ProfileId = user.ProfileId,
+            };
+        }
+
+        this.HttpContextAccessor.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        this.HttpContextAccessor.HttpContext.Response.HttpContext.Abort();
+        return null;
     }
 }
