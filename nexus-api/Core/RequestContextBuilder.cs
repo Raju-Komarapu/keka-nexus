@@ -7,8 +7,12 @@ namespace Nexus.WebAPI.Core;
 public class RequestContextBuilder
 {
     public IHttpContextAccessor HttpContextAccessor { get; }
+
     public ContextService ContextService { get; }
-    public RequestContextBuilder(IHttpContextAccessor httpContextAccessor, ContextService contextService)
+
+    public RequestContextBuilder(
+        IHttpContextAccessor httpContextAccessor, 
+        ContextService contextService)
     {
         this.HttpContextAccessor = httpContextAccessor;
         this.ContextService = contextService;
@@ -20,7 +24,7 @@ public class RequestContextBuilder
         if (identity?.IsAuthenticated ?? false)
         {
             var user = this.ContextService.GetUserByIdentifier(identity?.Claims?.SingleOrDefault(c => c.Type == "UserIdentifier")?.Value);
-            var k = this.HttpContextAccessor;
+
             return new RequestContext()
             {
                 UserId = user.Id,
