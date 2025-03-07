@@ -10,5 +10,7 @@ public class DataMapperProfile: Profile
         this.CreateMap<User, DbUser>()
             .ReverseMap();
 
+        this.CreateMap<CandidateProfile, DbCandidateProfile>()
+            .ReverseMap();
     }
 }
