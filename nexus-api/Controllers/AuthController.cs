@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
         return this.AuthService.Login(loginDTO);
     }
 
-    [HttpPost("Register")]
+    [HttpPost("register")]
     public string Register(RegisterDTO registerDTO)
     {
         return this.AuthService.Register(registerDTO);
