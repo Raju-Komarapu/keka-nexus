@@ -28,5 +28,4 @@ public class AuthController : ControllerBase
     {
         return this.AuthService.Register(registerDTO);
     }
-
 }

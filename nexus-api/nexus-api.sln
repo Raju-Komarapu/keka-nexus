@@ -5,11 +5,13 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nexus.WebAPI", "Nexus.WebAPI.csproj", "{8FCCED59-4B31-4C0E-978D-4750AE66B26B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus.Application", "..\Nexus.Application\Nexus.Application.csproj", "{BF2672B4-9C17-43B0-A78F-D12977204809}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nexus.Application", "..\Nexus.Application\Nexus.Application.csproj", "{BF2672B4-9C17-43B0-A78F-D12977204809}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus.Core", "..\Nexus.Core\Nexus.Core.csproj", "{A9C14378-7700-4C54-8576-0066D7E60E5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nexus.Core", "..\Nexus.Core\Nexus.Core.csproj", "{A9C14378-7700-4C54-8576-0066D7E60E5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus.Infrastructure", "..\Nexus.Infrastructure\Nexus.Infrastructure.csproj", "{3635ED91-E41F-48B8-A13D-300D974F12E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nexus.Infrastructure", "..\Nexus.Infrastructure\Nexus.Infrastructure.csproj", "{3635ED91-E41F-48B8-A13D-300D974F12E5}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Nexus.DataBase", "..\Nexus.DataBase\Nexus.DataBase.sqlproj", "{CC66C544-1952-4766-ABC2-187F6F34569F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,12 @@ Global
 		{3635ED91-E41F-48B8-A13D-300D974F12E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3635ED91-E41F-48B8-A13D-300D974F12E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3635ED91-E41F-48B8-A13D-300D974F12E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC66C544-1952-4766-ABC2-187F6F34569F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC66C544-1952-4766-ABC2-187F6F34569F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC66C544-1952-4766-ABC2-187F6F34569F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CC66C544-1952-4766-ABC2-187F6F34569F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC66C544-1952-4766-ABC2-187F6F34569F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC66C544-1952-4766-ABC2-187F6F34569F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
