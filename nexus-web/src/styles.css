@@ -23,3 +23,7 @@ body {
 .w-450 {
     width: 450px;
 }
+
+.primary-bg-purple {
+    background-color: #5746AF;
+}
