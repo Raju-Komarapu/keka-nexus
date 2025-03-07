@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { ProfileComponent } from './home/profile/profile.component';
 import { authGuard } from './auth/route-guards/auth-guard';
-import { JobComponent } from './job/job.component';
+import { JobComponent } from './home/job/job.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },

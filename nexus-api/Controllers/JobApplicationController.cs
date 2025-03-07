@@ -21,7 +21,7 @@ namespace nexus_api.Controllers
             return jobApplicationService.UpdateJobApplicationStatus(jobApplication);
         }
 
-        [HttpPost("")]
+        [HttpPost]
         public bool AddJobApplication([FromBody] JobApplicationDto jobApplication)
         {
             return jobApplicationService.AddJobApplication(jobApplication);

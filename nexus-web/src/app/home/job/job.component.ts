@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { AIChatbotComponent } from '../shared/components/ai-chatbot/ai-chatbot.component';
+import { AIChatbotComponent } from '../../shared/components/ai-chatbot/ai-chatbot.component';
 
 interface Mentor {
   name: string;
