@@ -1,0 +1,20 @@
+﻿CREATE TABLE CandidateProfile (
+    Id					INT IDENTITY(1,1) PRIMARY KEY,                 
+    Identifier			UNIQUEIDENTIFIER	NOT NULL,                    
+    FirstName			NVARCHAR(128)		NOT NULL, 
+	MiddleName			NVARCHAR(128)		NULL,
+    LastName			NVARCHAR(128)		NULL,
+	Email				NVARCHAR(128)		NOT NULL,
+	Phone				NVARCHAR(128)		NOT NULL,
+	DateOfBirth			DATE				NULL,
+	ExpectedSalary		NVARCHAR(32)		NULL,
+	CurrentSalary		NVARCHAR(32)		NULL,
+	[Address]			NVARCHAR(MAX)		NULL,
+	CurrentLocation		NVARCHAR(MAX)		NULL,
+	PreferredLocation	NVARCHAR(MAX)		NULL,
+	Experience			NVARCHAR(MAX)		NULL,
+	Education			NVARCHAR(MAX)		NULL,
+	ResumeLocation		NVARCHAR(MAX)		NULL,
+	CreatedOn			DATETIME			NOT NULL DEFAULT(GETUTCDATE()),
+	ModifiedOn			DATETIME			NOT NULL DEFAULT(GETUTCDATE())
+);

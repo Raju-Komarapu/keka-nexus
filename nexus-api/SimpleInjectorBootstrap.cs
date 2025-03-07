@@ -16,5 +16,9 @@ public class SimpleInjectorBootstrap
         container.Register<IHttpContextAccessor, HttpContextAccessor>(Lifestyle.Singleton);
         container.Register<IRequestContext>(() => container.GetInstance<RequestContextBuilder>().Build(), Lifestyle.Scoped);
         container.Register<DatabaseContext>(() => new DatabaseContext(configuration.GetConnectionString("Default")), Lifestyle.Scoped);
+
+        container.Register<IAuthService, AuthService>(Lifestyle.Scoped);
+        container.Register<IUserRepository, UserRepository>(Lifestyle.Scoped);
+        container.Register<ICandidateProfileRepository, CandidateProfileRepository>(Lifestyle.Scoped);
     }
 }
