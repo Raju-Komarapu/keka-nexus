@@ -5,6 +5,8 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ValidationMessagesComponent } from '../../../shared/components/validation-messages/validation-messages.component';
 import { NotificationService } from '../../../shared/services/notification.service';
+import { AuthResponse } from '../../models/auth-response';
+import { ContextService } from '../../../context/context-service';
 
 @Component({
     selector: 'app-login',
@@ -27,10 +29,13 @@ export class LoginComponent implements OnInit {
         ]
     }
 
-    constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router) {}
+    constructor(private authService: AuthService, 
+                private notificationService: NotificationService, 
+                private router: Router,
+                private contextService: ContextService) {}
 
     ngOnInit(): void {
-        if(this.authService.isLoggedIn()) {
+        if(this.authService.hasToken()) {
             this.router.navigate(['/home']);
         }
 
@@ -49,9 +54,19 @@ export class LoginComponent implements OnInit {
         const loginModal = this.loginForm.value;
         this.isInProgress = true;
         this.authService.login(loginModal).subscribe({
-            next: (token) => {
-                this.authService.setToken(token);
-                this.router.navigate(['/home']);
+            next: (response: AuthResponse) => {
+                if (!response.succeeded) {
+                    this.notificationService.error("Error", response.message);
+                    return;
+                }
+                this.authService.setToken(response.token);
+                this.contextService.initialize().then((result: boolean) => {
+                    if (result) {
+                        this.router.navigate(['/home']);
+                    }
+                }).catch((error) => {
+                    this.notificationService.error("Error", error?.message ?? "Error getting context")
+                });
             },
             error: (err) => {
                 this.notificationService.error("Error", err?.message ?? "Error logging in")

@@ -1,0 +1,149 @@
+<div class="mx-5" *ngIf="candidateProfile">
+    <div class="bg-white mt-3 p-4">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex gap-2">
+                <img src="" alt="Not loaded">
+                <div>
+                    <div class="mb-1">{{fullName}}</div>
+                    <div>{{candidateProfile.email}}</div>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-outline-primary">Edit profile</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white mt-3 px-4 p-3">
+        <div class="fs-5 fw-semibold mb-2">Job Preferences</div>
+        <div class="row">
+            <div class="col">
+                <div>
+                    <div class="text-secondary">Expected Salary</div>
+                    <div>{{candidateProfile.expectedSalary}}</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <div class="text-secondary">Current Salary</div>
+                    <div>{{candidateProfile.currentSalary}}</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <div class="text-secondary">Willing To Relocate</div>
+                    <div>{{candidateProfile.preferredLocation ?? 'Need to update'}}</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <div class="text-secondary">Preferred Mode of Working</div>
+                    <div>{{'--'}}</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <div class="text-secondary">Preferred Location</div>
+                    <div>{{candidateProfile.preferredLocation}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white mt-3 px-4 p-3">
+        <div class="fs-5 fw-semibold mb-2">Personal Details</div>
+        <div class="row">
+            <div class="col">
+                <div>
+                    <div class="text-secondary">First Name</div>
+                    <div>{{candidateProfile.firstName}}</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <div class="text-secondary">Last Name</div>
+                    <div>{{candidateProfile.lastName}}</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <div class="text-secondary">Middle Name</div>
+                    <div>{{candidateProfile.middleName ?? '--'}}</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <div class="text-secondary">Date Of birth</div>
+                    <div>{{candidateProfile.dateOfBirth | date: 'dd-MM-yyyy'}}</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <div class="text-secondary">Current Location</div>
+                    <div>{{candidateProfile.address.countryName}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white mt-3 px-4 p-3">
+        <div class="fs-5 fw-semibold mb-2">Contact Details</div>
+        <div class="row">
+            <div class="col-5">
+                <div>
+                    <div class="text-secondary">Email</div>
+                    <div>{{candidateProfile.email}}</div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div>
+                    <div class="text-secondary">Mobile</div>
+                    <div>{{candidateProfile.phone}}</div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div>
+                    <div class="text-secondary">Website</div>
+                    <div>{{'--'}}</div>
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <div class="text-secondary">Address</div>
+                <div>{{candidateAddress}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white mt-3 px-4 p-3">
+        <div class="fs-5 fw-semibold mb-2">Experience</div>
+        <ng-container *ngFor="let experience of candidateProfile.experience">
+            <div class="bg-body-secondary bg-opacity-25 p-2">
+                <div class="mb-1 fw-semibold">{{experience.companyName}}</div>
+                <div class="mb-1">{{experience.dateOfJoining | date: 'dd-MM-yyyy'}} - {{experience.isCurrentlyWorking ? 'Present' : (experience.dateOfRelieving | date: 'dd-MM-yyyy')}}</div>
+                <div>{{experience.location}}</div>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="bg-white mt-3 px-4 p-3">
+        <div class="fs-5 fw-semibold mb-2">Education</div>
+        <ng-container *ngFor="let education of candidateProfile.education">
+            <div class="bg-body-secondary bg-opacity-25 p-2">
+                <div class="mb-1 fw-semibold">{{education.institutionName}}, {{education.location}}</div>
+                <div class="mb-1">{{education.degree}}, {{education.specialization}}</div>
+                <div class="mb-1">{{education.startDate | date: 'yyyy'}} - {{education.endDate ? (education.endDate | date: 'yyyy') : 'Present'}}</div>
+            </div>
+        </ng-container>
+    </div>
+</div>

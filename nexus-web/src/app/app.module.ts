@@ -16,19 +16,10 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        // ToastrModule.forRoot({
-        //     positionClass: 'toast-top-right',
-        //     timeOut: 3000000,
-        //     extendedTimeOut: 3000000,
-        //     preventDuplicates: true
-        // }),
         ToastrModule.forRoot({
             positionClass: 'toast-top-right',
-            timeOut: 0,               // Toast will not auto-dismiss
-            extendedTimeOut: 0,       // Extended timeout is also disabled
-            preventDuplicates: true,
-            tapToDismiss: false,      // Prevent accidental dismissal on click
-            closeButton: true         // Provide a close button for manual dismissal
+            timeOut: 3000,
+            preventDuplicates: true
         }),
         HttpClientModule
     ],

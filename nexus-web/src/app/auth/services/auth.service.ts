@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Login } from '../models/login';
 import { Register } from '../models/register';
+import { AuthResponse } from '../models/auth-response';
 
 @Injectable({
     providedIn: 'root'
@@ -32,15 +33,15 @@ export class AuthService {
         this.router.navigate(['/login']);
     }
 
-    isLoggedIn(): boolean {
+    hasToken(): boolean {
         return !!this.getToken();
     }
 
-    login(loginModal: Login): Observable<string> {
-        return this.httpClient.post<string>(`${this.apiUrl}/login`, loginModal);
+    login(loginModal: Login): Observable<AuthResponse> {
+        return this.httpClient.post<AuthResponse>(`${this.apiUrl}/login`, loginModal);
     }
 
-    register(registerModal: Register): Observable<string> {
-        return this.httpClient.post<string>(`${this.apiUrl}/register`, registerModal);
+    register(registerModal: Register): Observable<AuthResponse> {
+        return this.httpClient.post<AuthResponse>(`${this.apiUrl}/register`, registerModal);
     }
 }

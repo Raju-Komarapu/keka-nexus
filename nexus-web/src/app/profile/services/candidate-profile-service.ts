@@ -1,0 +1,18 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { CandidateProfile } from '../models/candidate-profile';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class CandidateProfileService {
+
+    private apiUrl: string = '/api/candidateprofile'
+    constructor(private httpClient: HttpClient) { }
+
+    getCandidateDetails(candidateProfileId: number): Observable<CandidateProfile> {
+        return this.httpClient.get<CandidateProfile>(`${this.apiUrl}/${candidateProfileId}`);
+    }
+}

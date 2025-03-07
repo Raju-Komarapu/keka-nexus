@@ -3,6 +3,15 @@
     background: linear-gradient(to bottom, #071f55, #b98fc1, #fed1ba); 
 }
 
+body {
+    background-color: #F2F3F5;
+    font-size: 14px;
+}
+
+.font-w {
+    font-size: 16px;
+}
+
 .w-600 {
     width: 600px;
 }
