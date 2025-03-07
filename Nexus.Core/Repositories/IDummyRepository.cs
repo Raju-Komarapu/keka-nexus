@@ -1,7 +1,6 @@
-﻿
-namespace Nexus.Core.Repositories
+﻿namespace Nexus.Core.Repositories;
+
+public interface IDummyRepository
 {
-    internal class IDummyRepository
-    {
-    }
+    Task<dynamic> GetAllData();
 }

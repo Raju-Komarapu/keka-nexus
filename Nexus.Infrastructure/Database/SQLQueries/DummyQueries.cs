@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nexus.Infrastructure.Database.SQLQueries
+﻿namespace Nexus.Infrastructure.Database.SQLQueries
 {
-    internal class DummyQueries
+    internal static class DummyQueries
     {
+        public const string SelectAll = @"
+        SELECT * 
+        FROM [Users]";
     }
 }
