@@ -1,10 +1,19 @@
 ﻿using Nexus.Application.DTO;
 using Nexus.Application.Services.Interfaces;
+using Nexus.Core.Models;
+using Nexus.Core.Repositories;
 
 namespace Nexus.Application.Services;
 public class AuthService : IAuthService
 {
-    public AuthService() { }
+    public IRequestContext RequestContext { get; set; }
+
+    public IUserRepository UserRepository { get; set; }
+
+    public AuthService(IRequestContext context, IUserRepository userRepository)
+    {
+        this.UserRepository = userRepository;
+    }
 
     public string Login(LoginDTO login)
     {
