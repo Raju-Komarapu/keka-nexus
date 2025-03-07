@@ -13,4 +13,16 @@ public class CandidateProfileRepository(DatabaseContext Db, IMapper mapper) : Ba
         var dbCandidateProfile = this.Mapper.Map<DbCandidateProfile>(candidateProfile);
         return this.Db.Connection.ExecuteScalar<int>(CandidateProfileQueries.InsertCandidateProfile, dbCandidateProfile);
     }
+
+    public bool UpdateCandidateProfile(CandidateProfile candidateProfile)
+    {
+        var dbCandidateProfile = this.Mapper.Map<DbCandidateProfile>(candidateProfile);
+        dbCandidateProfile.ModifiedOn = DateTime.UtcNow;
+        return this.Db.Connection.Execute(CandidateProfileQueries.UpdateCandidateProfile, dbCandidateProfile) == 1;
+    }
+
+    public bool DoesCandidateExist(int candidateProfileId)
+    {
+        return this.Db.Connection.ExecuteScalar<bool>(CandidateProfileQueries.DoesCandidateExist, new { Id = candidateProfileId });
+    }
 }

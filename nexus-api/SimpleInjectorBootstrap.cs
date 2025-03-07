@@ -20,5 +20,6 @@ public class SimpleInjectorBootstrap
         container.Register<IAuthService, AuthService>(Lifestyle.Scoped);
         container.Register<IUserRepository, UserRepository>(Lifestyle.Scoped);
         container.Register<ICandidateProfileRepository, CandidateProfileRepository>(Lifestyle.Scoped);
+        container.Register<ICandidateProfileService, CandidateProfileService>(Lifestyle.Scoped);
     }
 }

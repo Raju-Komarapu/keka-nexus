@@ -1,4 +1,4 @@
-﻿namespace Nexus.Core.Models.Authentication;
+﻿namespace Nexus.Core.Models;
 public class AuthResponse
 {
     public AuthResponse()

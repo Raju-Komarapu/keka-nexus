@@ -8,5 +8,7 @@ public class DtoMapperProfile : Profile
     public DtoMapperProfile()
     {
         this.CreateMap<RegisterDTO, CandidateProfile>();
+
+        this.CreateMap<CandidateProfileDto, CandidateProfile>();
     }
 }

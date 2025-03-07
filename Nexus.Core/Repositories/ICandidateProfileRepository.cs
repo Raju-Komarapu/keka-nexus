@@ -4,4 +4,8 @@ namespace Nexus.Core.Repositories;
 public interface ICandidateProfileRepository
 {
     int AddCandidateProfile(CandidateProfile candidateProfile);
+
+    bool UpdateCandidateProfile(CandidateProfile candidateProfile);
+
+    bool DoesCandidateExist(int  candidateProfileId);
 }
