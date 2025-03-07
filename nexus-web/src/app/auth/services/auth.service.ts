@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Login } from '../models/login';
+import { Register } from '../models/register';
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +36,11 @@ export class AuthService {
         return !!this.getToken();
     }
 
-    login(loginModal: { email: string, password: string }): Observable<string> {
+    login(loginModal: Login): Observable<string> {
         return this.httpClient.post<string>(`${this.apiUrl}/login`, loginModal);
+    }
+
+    register(registerModal: Register): Observable<string> {
+        return this.httpClient.post<string>(`${this.apiUrl}/register`, registerModal);
     }
 }

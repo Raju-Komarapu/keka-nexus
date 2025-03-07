@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { ValidationMessagesComponent } from '../../../shared/components/validation-messages/validation-messages.component';
@@ -11,7 +11,7 @@ import { NotificationService } from '../../../shared/services/notification.servi
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
     standalone: true,
-    imports: [ReactiveFormsModule, ValidationMessagesComponent]
+    imports: [ReactiveFormsModule, ValidationMessagesComponent, RouterModule ]
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
