@@ -1,0 +1,96 @@
+<div>
+    <div class="header">
+        <div style="width: 1024px;">
+            <a href="#/my-applications" class="back-link">← View all applications</a>
+
+            <div class="job-header">
+                <div>Linkedin</div>
+                <div class="job-title">{{ jobTitle }}</div>
+            </div>
+
+            <div class="job-meta">
+                <span><i class="ph ph-user"></i> {{ experience }}</span>
+                <span><i class="ph ph-map-pin"></i> {{ location }}</span>
+                <span><i class="ph ph-suitcase"></i> {{ type }}</span>
+                <span><i class="ph ph-money"></i> {{ salary }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="container-body">
+            <div class="application-status">
+                <div class="status-timeline">
+                    <div *ngFor="let stage of stages" class="stage" [class.completed]="stage.completed">
+                        <div class="stage-dot">
+                            <div class="stage-dot-filled"></div>
+                        </div>
+                        <div class="stage-name">{{ stage.name }}</div>
+                        <div class="stage-date">
+                            <div *ngIf="stage.completed">{{ applicationDate }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-2">
+                <div class="job-description">
+                    <h3>Job description</h3>
+                    <p class="summary">
+                        Summary:<br>
+                        We are seeking a talented and experienced Associate Product Designer to join our dynamic product
+                        team.
+                        The
+                        ideal candidate will have at least 4 years of experience in the product department and a strong
+                        passion
+                        for
+                        creating innovative and user-friendly designs. As an Associate Product Designer, you will work
+                        closely
+                        with
+                        our product managers and engineers to bring our product vision to life through thoughtful and
+                        visually
+                        appealing designs.
+                    </p>
+                    <button class="read-more">Read more</button>
+                    <div class="working-hours">
+                        <div class="question">
+                            <img src="..\assets\wand.svg">
+                            <span>What are the working hours?</span>
+                        </div>
+                        <button class="ai-button">Find out with Keka AI</button>
+                    </div>
+                </div>
+                <div class="interviews-section">
+                    <div style="display: flex; flex-direction: column; align-items: center; color: #666;">
+                        <img width="80px" src="..\assets\empty-box.svg">
+                        <p>No interviews scheduled yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="mentorship-section">
+                <div class="section-header">
+                    <h3>Get free mentorship</h3>
+                    <span class="new-tag">New</span>
+                    <a href="#" class="view-all">View all</a>
+                </div>
+
+                <div class="mentors-grid">
+                    <div class="mentor-card" *ngFor="let mentor of mentors">
+                        <img [src]="mentor.image" [alt]="mentor.name" class="mentor-image">
+                        <div class="mentor-info">
+                            <h4>{{ mentor.name }}</h4>
+                            <p>{{ mentor.role }}</p>
+                            <p class="experience">{{ mentor.experience }}</p>
+                            <div class="rating">
+                                <span *ngFor="let star of [1,2,3,4,5]">
+                                    ⭐
+                                </span>
+                            </div>
+                            <button class="session-button">Book a free session</button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
