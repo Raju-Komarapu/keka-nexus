@@ -1,8 +1,12 @@
-﻿namespace Nexus.Core.Models;
-public class CandidateProfile
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Nexus.Infrastructure.Database.DbModels;
+
+internal class DbCandidateProfile: DbBaseModel
 {
+    [Key]
     public int Id { get; set; }
-    public string Identifier { get; set; } = Guid.NewGuid().ToString();
+    public string Identifier { get; set; }
     public string FirstName { get; set; }
     public string MiddleName { get; set; }
     public string LastName { get; set; }

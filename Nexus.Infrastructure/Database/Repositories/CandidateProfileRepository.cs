@@ -1,12 +1,16 @@
 ﻿using AutoMapper;
+using Dapper;
 using Nexus.Core.Models;
 using Nexus.Core.Repositories;
+using Nexus.Infrastructure.Database.DbModels;
+using Nexus.Infrastructure.Database.SQLQueries;
 
 namespace Nexus.Infrastructure.Database.Repositories;
-internal class CandidateProfileRepository(DatabaseContext Db, IMapper mapper) : BaseRepository(Db, mapper), ICandidateProfileRepository
+public class CandidateProfileRepository(DatabaseContext Db, IMapper mapper) : BaseRepository(Db, mapper), ICandidateProfileRepository
 {
-    public long AddCandidateProfile(CandidateProfile candidateProfile)
+    public int AddCandidateProfile(CandidateProfile candidateProfile)
     {
-        throw new NotImplementedException();
+        var dbCandidateProfile = this.Mapper.Map<DbCandidateProfile>(candidateProfile);
+        return this.Db.Connection.ExecuteScalar<int>(CandidateProfileQueries.InsertCandidateProfile, dbCandidateProfile);
     }
 }

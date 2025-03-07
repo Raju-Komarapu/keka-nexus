@@ -3,5 +3,5 @@
 namespace Nexus.Core.Repositories;
 public interface ICandidateProfileRepository
 {
-    long AddCandidateProfile(CandidateProfile candidateProfile);
+    int AddCandidateProfile(CandidateProfile candidateProfile);
 }
