@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Nexus.Application.DTO;
 using Nexus.Application.Services.Interfaces;
+using Nexus.Core.Models.Authentication;
 
 namespace nexus_api.Controllers;
 
@@ -18,13 +19,13 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public string Login(LoginDTO loginDTO)
+    public AuthResponse Login(LoginDTO loginDTO)
     {
         return this.AuthService.Login(loginDTO);
     }
 
-    [HttpPost("Register")]
-    public string Register(RegisterDTO registerDTO)
+    [HttpPost("register")]
+    public AuthResponse Register(RegisterDTO registerDTO)
     {
         return this.AuthService.Register(registerDTO);
     }

@@ -7,4 +7,9 @@ internal static class CandidateProfileQueries
             (Identifier, FirstName, LastName, Email, Phone) OUTPUT INSERTED.Id
         VALUES (@Identifier, @FirstName, @LastName, @Email, @Phone)
     ";
+
+    public const string GetProfilebyEmail = @"
+        SELECT * FROM [CandidateProfile]
+        WHERE Email  = @Email
+    ";
 }

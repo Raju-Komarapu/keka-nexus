@@ -6,7 +6,7 @@ internal class DbCandidateProfile: DbBaseModel
 {
     [Key]
     public int Id { get; set; }
-    public string Identifier { get; set; }
+    public Guid Identifier { get; set; }
     public string FirstName { get; set; }
     public string MiddleName { get; set; }
     public string LastName { get; set; }
