@@ -8,12 +8,17 @@ internal static class CandidateProfileQueries
         VALUES (@Identifier, @FirstName, @LastName, @Email, @Phone)
     ";
 
+    public const string GetCandidateById = @"
+        SELECT * 
+        FROM [CandidateProfile]
+        WHERE Id = @Id
+    ";
+
     public const string UpdateCandidateProfile = @"
         UPDATE [CandidateProfile]
             SET FirstName = @FirstName,
                 MiddleName = @MiddleName,
                 LastName = @LastName,
-                Email = @Email,
                 Phone = @Phone,
                 DateOfBirth = @DateOfBirth,
                 ExpectedSalary = @ExpectedSalary,
