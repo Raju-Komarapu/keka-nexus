@@ -11,7 +11,6 @@ import { ContextService } from '../../../context/context-service';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
     standalone: true,
     imports: [ReactiveFormsModule, ValidationMessagesComponent, RouterModule ]
 })

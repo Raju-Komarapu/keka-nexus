@@ -12,7 +12,6 @@ import { ContextService } from '../../../context/context-service';
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css'],
     standalone: true,
     imports: [ReactiveFormsModule, ValidationMessagesComponent, RouterModule]
 })
