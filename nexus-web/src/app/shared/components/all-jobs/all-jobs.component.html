@@ -1,0 +1,15 @@
+<div *ngIf="allJobs" class="py-4 px-5">
+    <h1 class="text-center">Open Positions</h1>
+    <div *ngFor="let job of allJobs" class="d-flex align-items-center justify-content-between p-4 border-bottom hover-bg-light">
+        <div class="flex-grow-1">
+            <div class="d-flex align-items-center gap-2">
+                <h3 class="h5 mb-0">{{ job.title }}</h3>
+            </div>
+            <div class="d-flex gap-4 mt-2 text-secondary small">
+                <span *ngIf="job.experience">{{job.experience}} yrs</span>
+                <span *ngIf="!job.experience">Not Available</span>
+                <span>{{ getJobType(job.jobType) }}</span>
+            </div>
+        </div>
+    </div>
+</div>
