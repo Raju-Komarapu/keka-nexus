@@ -1,0 +1,29 @@
+<div class="d-flex h-100">
+    <div class="w-400 gradient-box"></div>
+    <div class="bg-white w-100 d-flex align-items-center justify-content-center h-100">
+        <div class="w-450" [formGroup]="loginForm">
+            <h3 class="text-center mb-3">Login</h3>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" formControlName="email"
+                    placeholder="Enter your email">
+                <validation-messages [validationMessages]="validationMessages.email"
+                    [formController]="loginForm.get('email')" [isFormSubmitted]="isFormSubmitted">
+                </validation-messages>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="text" id="password" class="form-control" formControlName="password"
+                    placeholder="Enter your password">
+                <validation-messages [validationMessages]="validationMessages.password"
+                    [formController]="loginForm.get('password')" [isFormSubmitted]="isFormSubmitted">
+                </validation-messages>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid || isInProgress" (click)="login()">Login</button>
+        </div>
+
+    </div>
+</div>

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Nexus.Application;
+using Nexus.Infrastructure;
 using SimpleInjector;
 using System.Text;
 
@@ -40,12 +42,13 @@ public static class ServiceCollectionExtensions
     {
         services.AddAutoMapper(options =>
         {
-            options.AddProfile<AutomapperBootstrap>();
+            options.AddProfile<DtoMapperProfile>();
+            options.AddProfile<DataMapperProfile>();
         });
         return services;
     }
 
-    public static IServiceCollection AddAuthenticationDetails(this IServiceCollection services)
+    public static IServiceCollection AddAuthenticationDetails(this IServiceCollection services, Container container)
     {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer("Authentication", options =>
         {
@@ -55,7 +58,7 @@ public static class ServiceCollectionExtensions
                 ValidateAudience = false,
                 ValidateLifetime = false,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(container.GetInstance<IConfiguration>().GetValue<string>("JWT:SecretCode")))
             };
         });
 
