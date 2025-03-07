@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { ProfileComponent } from './home/profile/profile.component';
 import { authGuard } from './auth/route-guards/auth-guard';
+import { AllJobsComponent } from './shared/components/all-jobs/all-jobs.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -13,6 +14,9 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'home', component: HomeComponent, canActivate: [authGuard],
       children: [
+          { 
+              path: '', component: AllJobsComponent
+          },
           {
               path: 'profile', component: ProfileComponent
           }

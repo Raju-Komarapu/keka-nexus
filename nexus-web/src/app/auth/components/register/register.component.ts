@@ -7,7 +7,6 @@ import { ValidationMessagesComponent } from '../../../shared/components/validati
 import { NotificationService } from '../../../shared/services/notification.service';
 import { Register } from '../../models/register';
 import { AuthResponse } from '../../models/auth-response';
-import { ContextService } from '../../../context/context-service';
 
 @Component({
     selector: 'app-register',
@@ -45,8 +44,7 @@ export class RegisterComponent implements OnInit {
 
     constructor(private authService: AuthService,
         private notificationService: NotificationService,
-        private router: Router,
-        private contextService: ContextService) { }
+        private router: Router) { }
 
     ngOnInit(): void {
         if (this.authService.hasToken()) {
@@ -83,13 +81,7 @@ export class RegisterComponent implements OnInit {
                     return;
                 }
                 this.authService.setToken(response.token);
-                this.contextService.initialize().then((result: boolean) => {
-                    if (result) {
-                        this.router.navigate(['/home']);
-                    }
-                }).catch((error) => {
-                    this.notificationService.error("Error", error?.message ?? "Error getting context")
-                });
+                this.router.navigate(['/home']);
             },
             error: (err) => {
                 this.notificationService.error("Error", err?.message ?? "Error signing in")

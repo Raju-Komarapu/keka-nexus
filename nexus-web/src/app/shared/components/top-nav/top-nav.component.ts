@@ -12,7 +12,7 @@ export class TopNavComponent implements OnInit {
     }
 
     get displayName() {
-        return this.contextService.getUser().displayName;
+        return this.contextService.getUser()?.displayName;
     }
 
     ngOnInit() {
