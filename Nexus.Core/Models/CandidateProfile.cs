@@ -11,10 +11,10 @@ public class CandidateProfile
     public DateTime? DateOfBirth { get; set; }
     public string ExpectedSalary { get; set; }
     public string CurrentSalary { get; set; }
-    public string Address { get; set; }
+    public Address Address { get; set; }
     public string CurrentLocation { get; set; }
-    public string PreferredLocation { get; set; }
-    public string Experience { get; set; }
-    public string Education { get; set; }
+    public PreferredLocation PreferredLocation { get; set; }
+    public IEnumerable<ExperienceDetails> Experience { get; set; }
+    public IEnumerable<EducationDetails> Education { get; set; }
     public string ResumeLocation { get; set; }
 }
