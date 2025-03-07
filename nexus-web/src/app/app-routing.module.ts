@@ -7,26 +7,29 @@ import { RegisterComponent } from './auth/components/register/register.component
 import { ProfileComponent } from './home/profile/profile.component';
 import { authGuard } from './auth/route-guards/auth-guard';
 import { AllJobsComponent } from './shared/components/all-jobs/all-jobs.component';
+import { JobComponent } from './home/job/job.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full'},
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'home', component: HomeComponent, canActivate: [authGuard],
       children: [
-          { 
-              path: '', component: AllJobsComponent
-          },
-          {
-              path: 'profile', component: ProfileComponent
-          }
+            { 
+                path: '', component: AllJobsComponent
+            },
+            {
+                path: 'profile', component: ProfileComponent
+            },
+            {
+                path: 'job', component: JobComponent
+            }
         ]
     },
-    
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, { useHash: true })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

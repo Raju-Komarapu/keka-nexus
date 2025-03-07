@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Nexus.Core.Extensions;
 using Nexus.Core.Models;
+using Nexus.Core.Models.Enums;
 using Nexus.Infrastructure.Database.DbModels;
 
 namespace Nexus.Infrastructure;
@@ -21,5 +22,10 @@ public class DataMapperProfile: Profile
             .ForMember(d => d.PreferredLocation, opt => opt.MapFrom(src => src.PreferredLocation.FromJson<PreferredLocation>()))    
             .ForMember(d => d.Experience, opt => opt.MapFrom(src => src.Experience.FromJson<IEnumerable<ExperienceDetails>>()))
             .ForMember(d => d.Education, opt => opt.MapFrom(src => src.Education.FromJson<IEnumerable<EducationDetails>>()));
+
+        this.CreateMap<JobApplication, DbJobApplication>()
+            .ForMember(d => d.ApplicationStatus, opt => opt.MapFrom(src => (short)src.ApplicationStatus))
+            .ReverseMap()
+            .ForMember(d => d.ApplicationStatus, opt => opt.MapFrom(src => (ApplicationStatus)src.ApplicationStatus));
     }
 }

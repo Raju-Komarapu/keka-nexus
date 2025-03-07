@@ -62,5 +62,6 @@
   <ItemGroup>
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\CandidateProfile.sql" />
+    <Build Include="dbo\Tables\JobApplication.sql" />
   </ItemGroup>
 </Project>
