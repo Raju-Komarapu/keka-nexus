@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
+import {ModalModule} from 'ngx-bootstrap/modal'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
@@ -14,6 +16,7 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
     ],
     imports: [
         BrowserModule,
+        ModalModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot({

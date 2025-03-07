@@ -1,8 +1,7 @@
 <div>
     <div class="header">
         <div style="width: 1024px;">
-            <a href="#/my-applications" class="back-link">← View all applications</a>
-
+            <a href="#/home/my-applications" class="back-link">← View all applications</a>
             <div class="job-header">
                 <div>Linkedin</div>
                 <div class="job-title">{{ jobTitle }}</div>
@@ -56,7 +55,7 @@
                             <img src="..\assets\wand.svg">
                             <span>What are the working hours?</span>
                         </div>
-                        <button class="ai-button">Find out with Keka AI</button>
+                        <button class="ai-button" (click)="OpenAIChatbot()">Find out with Keka AI</button>
                     </div>
                 </div>
                 <div class="interviews-section">

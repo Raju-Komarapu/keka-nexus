@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { AIChatbotComponent } from '../shared/components/ai-chatbot/ai-chatbot.component';
 
 interface Mentor {
   name: string;
@@ -13,6 +15,7 @@ interface Mentor {
   selector: 'app-job',
   standalone: true,
   imports: [CommonModule],
+  providers: [BsModalService],
   templateUrl: './job.component.html',
   styleUrls: ['./job.component.css']
 })
@@ -63,4 +66,18 @@ export class JobComponent {
     'What are the offsite locations?',
     'What is the standard salary for an SDE II?'
   ];
+
+  
+  constructor(private ModalService: BsModalService) {
+    
+  }
+
+  OpenAIChatbot(){
+    const config = {
+        backdrop: true,
+        ignoreBackdropClick: true, // Do not close the modal when clicking outside
+        class: 'modal-right' // Example to make the modal large
+      };
+    this.ModalService.show(AIChatbotComponent, config);
+  }
 }

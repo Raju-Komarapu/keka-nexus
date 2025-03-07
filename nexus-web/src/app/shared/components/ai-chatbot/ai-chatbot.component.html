@@ -1,0 +1,31 @@
+<div class="modal-right container">
+    <div class="modal-header">
+      <div class="company-info">
+        <img src="..\assets\wand.svg" alt="Company Logo" class="company-logo">
+        <span class="company-name">Koka AI</span>
+      </div>
+      <button class="close-button" (click)="closeChat()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="chat-messages">
+        <div class="welcome-message">
+          <h2>What do you want to know?</h2>
+        </div>
+      </div>
+
+      <div class="suggested-questions">
+        <button class="question-button" *ngFor="let question of suggestedQuestions" 
+                (click)="askQuestion(question)">
+          {{ question }}
+        </button>
+      </div>
+
+      <div class="chat-input">
+        <input type="text" 
+              [(ngModel)]="userMessage" 
+              placeholder="Ask anything about the company..."
+              (keyup.enter)="sendMessage()">
+        <button class="send-button" (click)="sendMessage()">→</button>
+      </div>
+    </div>
+  </div>
