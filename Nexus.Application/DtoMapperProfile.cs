@@ -15,5 +15,8 @@ public class DtoMapperProfile: Profile
 
         this.CreateMap<CandidateProfileDto, CandidateProfile>()
             .ReverseMap();
+
+        this.CreateMap<JobApplicationDto, JobApplication>()
+            .ReverseMap();
     }
 }
