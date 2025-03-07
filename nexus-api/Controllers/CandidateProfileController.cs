@@ -5,7 +5,8 @@ using Nexus.Application.Services.Interfaces;
 namespace Nexus.WebAPI.Controllers;
 
 [Route("api/candidateprofile")]
-public class CandidateProfileController(ICandidateProfileService candidateProfileService)
+public class CandidateProfileController(
+    ICandidateProfileService candidateProfileService)
     : BaseController
 {
     [HttpPut]

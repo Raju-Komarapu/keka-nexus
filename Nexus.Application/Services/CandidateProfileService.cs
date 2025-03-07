@@ -6,8 +6,8 @@ using Nexus.Core.Repositories;
 
 namespace Nexus.Application.Services;
 
-public class CandidateProfileService(IMapper mapper, ICandidateProfileRepository candidateProfileRepository)
-    : ICandidateProfileService
+public class CandidateProfileService(IRequestContext requestContext, IMapper mapper, ICandidateProfileRepository candidateProfileRepository)
+    : ServiceBase(requestContext), ICandidateProfileService
 {
     public bool UpdateCandidateProfile(CandidateProfileDto candidateProfileDto)
     {

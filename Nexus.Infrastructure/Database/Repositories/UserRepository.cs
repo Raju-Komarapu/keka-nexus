@@ -24,7 +24,7 @@ public class UserRepository(DatabaseContext db, IMapper mapper) : BaseRepository
 
     public User GetUserByIdentifier(string userIdentifier)
     {
-        var user = this.Db.Connection.QuerySingleOrDefault<DbUser>(UserQueries.GetById, new { Identfier = userIdentifier });
+        var user = this.Db.Connection.QuerySingleOrDefault<DbUser>(UserQueries.GetByIdentifier, new { Identifier = userIdentifier });
         return user is not null ? this.Mapper.Map<User>(user) : null;
     }
 
