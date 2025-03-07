@@ -2,17 +2,15 @@
 using Nexus.Core.Repositories;
 
 namespace Nexus.Application.Services;
-public class ContextService
+public class ContextService(IUserRepository userRepository, ICandidateProfileRepository candidateProfileRepository)
 {
-    private readonly IUserRepository UserRepository;
-    public ContextService(IUserRepository userRepository)
-    {
-        this.UserRepository = userRepository;
-    }
-
     public User GetUserByIdentifier(string userIdentifier)
     {
-        return this.UserRepository.GetUserByIdentifier(userIdentifier);
+        return userRepository.GetUserByIdentifier(userIdentifier);
     }
 
+    public string GetDisplayName(int profileId)
+    {
+        return candidateProfileRepository.GetCandidateProfile(profileId).DisplayName;
+    }
 }

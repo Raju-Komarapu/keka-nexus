@@ -17,4 +17,12 @@ public class CandidateProfile
     public IEnumerable<ExperienceDetails> Experience { get; set; }
     public IEnumerable<EducationDetails> Education { get; set; }
     public string ResumeLocation { get; set; }
+
+    public string DisplayName
+    {
+        get
+        {
+            return this.FirstName + " " + this.LastName;
+        }
+    }
 }

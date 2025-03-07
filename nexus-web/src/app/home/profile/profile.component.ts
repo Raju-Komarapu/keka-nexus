@@ -2,13 +2,12 @@ import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { CandidateProfileService } from './services/candidate-profile-service';
-import { ContextService } from '../context/context-service';
+import { ContextService } from '../../context/context-service';
 import { CandidateProfile } from './models/candidate-profile';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
   standalone: true,
   imports: [DatePipe, NgIf, NgFor]
 })
