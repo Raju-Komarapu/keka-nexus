@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
     getCandidateProfileDetails() {
         this.candidateProfile = candiadateProfile;
         return;
-        this.candidateProfileService.getCandidateDetails(this.contextService.getUser().userId).subscribe({
+        this.candidateProfileService.getCandidateDetails().subscribe({
             next: (data) => {
                 this.candidateProfile = data;
             }

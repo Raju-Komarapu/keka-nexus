@@ -2,7 +2,8 @@
     <div class="bg-white mt-3 p-4">
         <div class="d-flex justify-content-between">
             <div class="d-flex gap-2">
-                <img src="" alt="Not loaded">
+                <!-- <img src="" alt="Not loaded"> -->
+                <i class="fs-1 ph ph-user-circle"></i>
                 <div>
                     <div class="mb-1">{{fullName}}</div>
                     <div>{{candidateProfile.email}}</div>
@@ -15,7 +16,10 @@
     </div>
 
     <div class="bg-white mt-3 px-4 p-3">
-        <div class="fs-5 fw-semibold mb-2">Job Preferences</div>
+        <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+            <i class="ph ph-user"></i>
+            <span>Job Preferences</span>
+        </div>
         <div class="row">
             <div class="col">
                 <div>
@@ -55,7 +59,10 @@
     </div>
 
     <div class="bg-white mt-3 px-4 p-3">
-        <div class="fs-5 fw-semibold mb-2">Personal Details</div>
+        <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+            <i class="ph ph-user"></i>
+            <span>Personal Details</span>
+        </div>
         <div class="row">
             <div class="col">
                 <div>
@@ -95,7 +102,10 @@
     </div>
 
     <div class="bg-white mt-3 px-4 p-3">
-        <div class="fs-5 fw-semibold mb-2">Contact Details</div>
+        <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+            <i class="ph ph-at"></i>
+            <span>Contact Details</span>
+        </div>
         <div class="row">
             <div class="col-5">
                 <div>
@@ -126,7 +136,10 @@
     </div>
 
     <div class="bg-white mt-3 px-4 p-3">
-        <div class="fs-5 fw-semibold mb-2">Experience</div>
+        <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+            <i class="ph ph-suitcase-simple"></i>
+            <span>Experience</span>
+        </div>
         <ng-container *ngFor="let experience of candidateProfile.experience">
             <div class="bg-body-secondary bg-opacity-25 p-2">
                 <div class="mb-1 fw-semibold">{{experience.companyName}}</div>
@@ -137,7 +150,10 @@
     </div>
 
     <div class="bg-white mt-3 px-4 p-3">
-        <div class="fs-5 fw-semibold mb-2">Education</div>
+        <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+            <i class="ph ph-graduation-cap"></i>
+            <span>Education</span>
+        </div>
         <ng-container *ngFor="let education of candidateProfile.education">
             <div class="bg-body-secondary bg-opacity-25 p-2">
                 <div class="mb-1 fw-semibold">{{education.institutionName}}, {{education.location}}</div>

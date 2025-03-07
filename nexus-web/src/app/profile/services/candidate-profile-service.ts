@@ -12,7 +12,7 @@ export class CandidateProfileService {
     private apiUrl: string = '/api/candidateprofile'
     constructor(private httpClient: HttpClient) { }
 
-    getCandidateDetails(candidateProfileId: number): Observable<CandidateProfile> {
-        return this.httpClient.get<CandidateProfile>(`${this.apiUrl}/${candidateProfileId}`);
+    getCandidateDetails(): Observable<CandidateProfile> {
+        return this.httpClient.get<CandidateProfile>(`${this.apiUrl}`);
     }
 }
