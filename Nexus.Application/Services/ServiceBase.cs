@@ -3,7 +3,7 @@
 namespace Nexus.Application.Services;
 public class ServiceBase
 {
-    public readonly IRequestContext RequestContext;
+    public IRequestContext RequestContext;
 
     public ServiceBase(IRequestContext requestContext)
     {

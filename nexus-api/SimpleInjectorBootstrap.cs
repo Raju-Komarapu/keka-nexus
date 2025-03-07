@@ -1,4 +1,6 @@
-﻿using Nexus.Core.Models;
+﻿using Nexus.Application.Services;
+using Nexus.Application.Services.Interfaces;
+using Nexus.Core.Models;
 using Nexus.WebAPI.Core;
 using SimpleInjector;
 
@@ -10,5 +12,6 @@ public class SimpleInjectorBootstrap
     {
         container.Register<IHttpContextAccessor, HttpContextAccessor>(Lifestyle.Singleton);
         container.Register<IRequestContext>(() => container.GetInstance<RequestContextBuilder>().Build(), Lifestyle.Scoped);
+        container.Register<IDummyService, DummyService>(Lifestyle.Scoped);
     }
 }
