@@ -2,8 +2,8 @@
     <div class="m-1 py-2 w-100 d-flex justify-content-center bg-secondary-subtle sticky-lg-top">
         <div class="filters-section w-50 bg-white my-2 d-flex align-items-center p-3 gap-4 rounded"
             style="height: 100px;">
-            <div class="search-container d-flex">
-                <div class="search-input">
+            <div class="row">
+                <div class="search-input col-3">
                     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -13,7 +13,7 @@
                     <input type="text" placeholder="Job title or keyword" (input)="onFiltersUpdated()"
                         [(ngModel)]="filters.searchKey">
                 </div>
-                <div class="search-input">
+                <div class="search-input col-3">
                     <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -23,7 +23,7 @@
                     <input type="text" placeholder="City or country" (input)="onFiltersUpdated()"
                         [(ngModel)]="filters.location">
                 </div>
-                <div class="dropdown" dropdown [autoClose]="false">
+                <div class="dropdown col-3" dropdown [autoClose]="false">
                     <div class="align-items-center border d-flex dropdown-toggle h-100 justify-content-center p-2 rounded-3 text-secondary pointer" style="min-width: 140px;" dropdownToggle>
                         <ng-container *ngIf="filters.department.length === 0"> Select Departments <span class="caret"></span> </ng-container>
                         <ng-container *ngIf="filters.department.length !== 0"> {{selectedDepartmentsName}} </ng-container>
@@ -38,7 +38,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="search-input">
+                <div class="search-input col-3">
                     <input type="text" placeholder="Company name" (input)="onFiltersUpdated()"
                         [(ngModel)]="filters.companyName">
                 </div>
