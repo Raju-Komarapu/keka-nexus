@@ -64,7 +64,7 @@ export class EditProfileComponent implements OnInit {
                 { type: 'required', message: "Preferred location name is required" },
             ],
             preferredModeOfWorking: [
-                { type: 'required', message: "Willingness to relocate is required" },
+                { type: 'required', message: "Preferred mode of working is required" },
             ],
             willingToRelocate: [
                 { type: 'required', message: "Willingness to relocate is required" },
