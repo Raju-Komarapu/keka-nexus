@@ -4,8 +4,8 @@ internal static class JobApplicationQueries
 {
     public const string InsertJobApplication = @"
         INSERT INTO [JobApplication]
-            (Identifier, JobId, TenantId, ProfileId, ApplicationStatus) OUTPUT INSERTED.Id
-        VALUES (@Identifier, @JobId, @TenantId, @ProfileId, @ApplicationStatus)
+            (Identifier, JobId, TenantId, ProfileId, ApplicationStatus, ApplicationStatusLog) OUTPUT INSERTED.Id
+        VALUES (@Identifier, @JobId, @TenantId, @ProfileId, @ApplicationStatus, @ApplicationStatusLog)
     ";
 
     public const string GetJobApplicationByProfielId = @"
@@ -17,6 +17,7 @@ internal static class JobApplicationQueries
     public const string UpdateJobApplicationStatus = @"
         UPDATE [JobApplication]
             SET ApplicationStatus = @ApplicationStatus,
+                ApplicationStatusLog = @ApplicationStatusLog,
                 ModifiedOn = @ModifiedOn
         WHERE Id = @Id And ProfileId = @ProfileId
     ";

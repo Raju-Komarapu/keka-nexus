@@ -1,10 +1,16 @@
-<div>
+<div *ngIf="job">
     <div class="header">
         <div style="width: 1024px;">
-            <a href="#/home/my-applications" class="back-link">← View all applications</a>
-            <div class="job-header">
-                <div>{{job.CompanyName}}</div>
-                <div class="job-title">{{ job.title }}</div>
+            <div (click)="goBack()" class="back-link" style="cursor: pointer;">← Go Back</div>
+            <div class="job-header d-flex justify-content-between w-">
+                <div>
+                    <div>{{job.companyName}}</div>
+                    <div class="job-title">{{ job.title }}</div>
+                </div>
+                <div>
+                    <div *ngIf="!jobApplication" class="rounded d-flex justify-content-center align-items-center" style="width: 100px; height: 36px; background: #5746af; color: white; cursor: pointer;" (click)="applyJob()">Apply Job</div>
+                    <div *ngIf="jobApplication" class="border border-success rounded d-flex justify-content-center align-items-center" style="width: 100px; height: 36px; border: 1px; color: #198754;">Applied</div>
+                </div>
             </div>
 
             <div class="job-meta">
@@ -17,15 +23,15 @@
     </div>
     <div class="container">
         <div class="container-body">
-            <div class="application-status">
+            <div *ngIf="jobApplication" class="application-status">
                 <div class="status-timeline">
-                    <div *ngFor="let stage of stages" class="stage" [class.completed]="stage.completed">
+                    <div *ngFor="let stage of applicationStatus" class="stage" [class.completed]="getStageCompletion(stage)">
                         <div class="stage-dot">
                             <div class="stage-dot-filled"></div>
                         </div>
-                        <div class="stage-name">{{ stage.name }}</div>
+                        <div class="stage-name">{{ getStageName(stage) }}</div>
                         <div class="stage-date">
-                            <div *ngIf="stage.completed">{{ applicationDate }}</div>
+                            <div *ngIf="getStageCompletion(stage)">{{ getStageCompletionDate(stage) }}</div>
                         </div>
                     </div>
                 </div>
@@ -40,8 +46,10 @@
                             </p>
                         </div>
                     </div>
-                    <button *ngIf="!isReadMore" class="read-more cursor-pointer" style="cursor: pointer;" (click)="openReadMoreDescription()">Read more</button>
-                    <button *ngIf="isReadMore" class="read-more cursor-pointer" style="cursor: pointer;" (click)="openReadLessDescription()">Read less</button>
+                    <button *ngIf="!isReadMore" class="read-more cursor-pointer" style="cursor: pointer;"
+                        (click)="openReadMoreDescription()">Read more</button>
+                    <button *ngIf="isReadMore" class="read-more cursor-pointer" style="cursor: pointer;"
+                        (click)="openReadLessDescription()">Read less</button>
                     <div class="working-hours">
                         <div class="question">
                             <img src="..\assets\wand.svg">
@@ -50,7 +58,7 @@
                         <button class="ai-button" (click)="OpenAIChatbot()">Find out with Keka AI</button>
                     </div>
                 </div>
-                <div class="interviews-section">
+                <div class="interviews-section rounded">
                     <div style="display: flex; flex-direction: column; align-items: center; color: #666;">
                         <img width="80px" src="..\assets\empty-box.svg">
                         <p>No interviews scheduled yet</p>

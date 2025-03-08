@@ -9,13 +9,13 @@ namespace nexus_api.Controllers
     [ApiController]
     public class JobApplicationController(IJobApplicationService jobApplicationService) : BaseController
     {
-        [HttpGet("")]
+        [HttpGet]
         public List<JobApplicationDto> GetCandidate()
         {
             return jobApplicationService.GetJobApplications();
         }
 
-        [HttpPut("")]
+        [HttpPut]
         public bool UpdateJobApplicationStatus([FromBody] JobApplicationDto jobApplication)
         {
             return jobApplicationService.UpdateJobApplicationStatus(jobApplication);
