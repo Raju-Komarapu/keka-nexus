@@ -61,7 +61,7 @@ body {
 
 .search-input input {
     width: 100%;
-    padding: 16px 16px 16px 48px;
+    padding: 16px 16px 16px 32px;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     font-size: 16px;
@@ -83,11 +83,18 @@ body {
 .search-icon,
 .location-icon {
     position: absolute;
-    left: 16px;
+    left: 20px;
     top: 50%;
     transform: translateY(-50%);
     color: #757575;
     pointer-events: none;
+}
+
+.mentor-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 15px;
 }
 
 /* Hover effects */

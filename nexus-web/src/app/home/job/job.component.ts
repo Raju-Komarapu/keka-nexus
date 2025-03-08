@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 import { JobApplicationService } from '../../shared/services/job-applications.services';
 import { NotificationService } from '../../shared/services/notification.service';
-import { ContextService } from 'src/app/context/context-service';
+import { AuthService } from '../../auth/services/auth.service';
 
 interface Mentor {
 	name: string;
@@ -25,7 +25,7 @@ interface Mentor {
 	templateUrl: './job.component.html',
 	styleUrls: ['./job.component.css']
 })
-export class JobComponent implements OnInit{
+export class JobComponent implements OnInit {
 	job: any;
 
 	applicationDate = 'Jan 23, 2023';
@@ -38,21 +38,21 @@ export class JobComponent implements OnInit{
 			role: 'Full Stack Developer',
 			experience: '12 Years Experience',
 			rating: 4,
-			image: 'https://via.placeholder.com/50'
+			image: 'https://avatar.iran.liara.run/public'
 		},
 		{
 			name: 'Vinod Kumar',
 			role: 'Full Stack Developer',
 			experience: '12 Years Experience',
 			rating: 4,
-			image: 'https://via.placeholder.com/50'
+			image: 'https://avatar.iran.liara.run/public'
 		},
 		{
 			name: 'Vinod Kumar',
 			role: 'Full Stack Developer',
 			experience: '12 Years Experience',
 			rating: 4,
-			image: 'https://via.placeholder.com/50'
+			image: 'https://avatar.iran.liara.run/public'
 		}
 	];
 
@@ -69,12 +69,12 @@ export class JobComponent implements OnInit{
 	currentQuestionInd = 0;
 
 	ngOnInit(): void {
-		setInterval(() => { this.currentQuestionInd = (this.currentQuestionInd + 1) % 4}, 2000);	
+		setInterval(() => { this.currentQuestionInd = (this.currentQuestionInd + 1) % 4 }, 2000);
 	}
-	
+
 	constructor(private ModalService: BsModalService,
 		private route: ActivatedRoute,
-		private contextService: ContextService,
+		private authService: AuthService,
 		private router: Router,
 		private datePipe: DatePipe,
 		private sharedDataService: SharedDataService,
@@ -116,16 +116,21 @@ export class JobComponent implements OnInit{
 	}
 
 	getMyJobApplication() {
-		if (this.contextService.getUser()) {
-			this.jobApplicationService.getAllJobApplications().subscribe(data => {
-				this.jobApplication = data.find(_ => _.jobId == this.jobId);
-				this.jobApplicationLogs = this.jobApplication?.applicationStatusLog;
+		if (this.authService.isLoggedIn()) {
+			this.jobApplicationService.getAllJobApplications().subscribe({
+				next: (data) => {
+					this.jobApplication = data.find(_ => _.jobId == this.jobId);
+					this.jobApplicationLogs = this.jobApplication?.applicationStatusLog;
+				},
+				error: (err) => {
+					this.notificationService.error("Error", err?.message ?? "Error in applying for job")
+				}
 			});
 		}
 	}
 
 	applyJob() {
-		if (this.contextService.getUser()) {
+		if (this.authService.isLoggedIn()) {
 			var jobApplication = {
 				"jobId": this.jobId,
 				"tenantId": this.job.tenantId,

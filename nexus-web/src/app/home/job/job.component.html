@@ -4,7 +4,7 @@
             <div (click)="goBack()" class="back-link" style="cursor: pointer;"><i class="ph ph-arrow-left"></i> Go Back</div>
             <div class="job-header d-flex justify-content-between w-">
                 <div>
-                    <div>{{job.companyName}}</div>
+                    <div class="d-flex align-items-center gap-1"><img src={{job.companylogo}} width="25px">{{job.companyName}}</div>
                     <div class="job-title">{{ job.title }}</div>
                 </div>
                 <div>
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container pb-4">
         <div class="container-body">
             <div *ngIf="jobApplication" class="application-status">
                 <div class="status-timeline">
@@ -66,11 +66,11 @@
                 </div>
             </div>
 
-            <!-- <div class="mentorship-section">
+            <div class="mentorship-section">
                 <div class="section-header">
                     <h3>Get free mentorship</h3>
                     <span class="new-tag">New</span>
-                    <a href="#" class="view-all">View all</a>
+                    <!-- <a href="#" class="view-all">View all</a> -->
                 </div>
 
                 <div class="mentors-grid">
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

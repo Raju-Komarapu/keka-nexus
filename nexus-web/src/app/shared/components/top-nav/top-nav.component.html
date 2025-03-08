@@ -1,33 +1,33 @@
 <div class="primary-bg-purple d-flex justify-content-between px-5 py-3 sticky-lg-top">
     <div>
-      <a href="#/home">
-        <img src="https://cdn.kekastatic.net/shared/branding/logo/keka-logo-white.png" alt="Keka Logo"/>
-      </a>
+        <a href="#/home">
+            <img src="https://cdn.kekastatic.net/shared/branding/logo/keka-logo-white.png" alt="Keka Logo" />
+        </a>
     </div>
     <div class="d-flex align-items-center fs-5">
-      <div class="d-flex align-items-center text-white" *ngIf="isLoggedIn">
-        <div class="dropdown" dropdown container="body" placement="bottom left">
-            <div dropdownToggle id="menu" aria-haspopup="true" aria-expanded="false">
-                <div class="d-flex align-items-center">
-                    <p class="m-0 pointer px-2">{{displayName}}</p>
-                    <button class="btn text-white"><i class="ph ph-caret-down"></i></button>
+        <div class="d-flex align-items-center text-white" *ngIf="isLoggedIn">
+            <div class="dropdown" dropdown container="body" placement="bottom left">
+                <div dropdownToggle id="menu" aria-haspopup="true" aria-expanded="false">
+                    <div class="d-flex align-items-center">
+                        <p class="m-0 pointer px-2">{{displayName}}</p>
+                        <img src="https://avatar.iran.liara.run/public/boy" width="30px" style="cursor: pointer;">
+                    </div>
                 </div>
+                <ul class="dropdown-menu dropdown-menu p-0 mt-3" aria-labelledby="menu" *dropdownMenu>
+                    <a class="text-decoration-none text-dark" routerLink="/home/profile">
+                        <li class="px-2 py-2">Profile</li>
+                    </a>
+                    <a class="text-decoration-none text-dark" routerLink="/home/my-applications">
+                        <li class="px-2 py-2">My Applications</li>
+                    </a>
+                    <a class="text-decoration-none text-dark" routerLink="/logout">
+                        <li class="px-2 py-2">Log out</li>
+                    </a>
+                </ul>
             </div>
-          <ul class="dropdown-menu dropdown-menu p-0" aria-labelledby="menu" *dropdownMenu>
-            <a class="text-decoration-none text-dark" routerLink="/home/profile">
-              <li class="px-2 py-1">Profile</li>
-            </a>
-            <a class="text-decoration-none text-dark" routerLink="/home/my-applications">
-              <li class="px-2 py-1">My Applications</li>
-            </a>
-            <a class="text-decoration-none text-dark" routerLink="/logout">
-              <li class="px-2 py-1">Log out</li>
-            </a>
-          </ul>
         </div>
-      </div>
-      <button *ngIf="!isLoggedIn" class="btn btn-outline-light" style="cursor: pointer;" routerLink="../login">
-        Login / Sign Up
-      </button>
+        <button *ngIf="!isLoggedIn" class="btn btn-outline-light" style="cursor: pointer;" routerLink="../login">
+            Login / Sign Up
+        </button>
     </div>
-  </div>
+</div>

@@ -32,10 +32,10 @@ export class AllJobsComponent implements OnInit {
             'https://dupli.kekad.com/careers/api/embedjobs/virat/active/841feddf-f587-4a22-9c14-401b22e58a46'
         ];
     tenantMappings = [
-        ['96b0f003-5600-4a23-9e06-1d9eec557a7d', 'Keka Technologies'],
-        ['8ecd5c82-8c88-42f6-8c4c-61d865e3ecdb', 'Raju Technologies'],
-        ['2e5dc04b-e1be-4037-a11b-014831d2fdff', 'Sravanth Technologies Pvt Ltd'],
-        ['7f7b3afb-ddc4-4e7c-9a70-31046f05837d', 'Ravi Technologies']
+        ['96b0f003-5600-4a23-9e06-1d9eec557a7d', 'Keka Technologies', 'https://stkekastaticdev.blob.core.windows.net/shared/branding/logo/keka-logo.svg'],
+        ['8ecd5c82-8c88-42f6-8c4c-61d865e3ecdb', 'Meta Technologies', 'https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/512px-Facebook_f_logo_%282021%29.svg.png?20210818083032'],
+        ['2e5dc04b-e1be-4037-a11b-014831d2fdff', 'Google', 'https://freelogopng.com/images/all_img/1657955079google-icon-png.png'],
+        ['7f7b3afb-ddc4-4e7c-9a70-31046f05837d', 'Youtube', 'https://www.interstellarrift.com/wiki/images/d/d8/Youtube-logo-png-photo-0.png']
     ]
     departments = [];
     filters = {
@@ -76,6 +76,7 @@ export class AllJobsComponent implements OnInit {
                         jobs.forEach(data => {
                             data.tenantId = tenantMapping[0];
                             data.companyName = tenantMapping[1];
+                            data.companylogo = tenantMapping[2];
                         })
                         this.allJobs = [...this.allJobs, ...jobs]
                         this.allJobs.sort((a, b) => {
