@@ -10,7 +10,18 @@ import { ContextService } from '../../../context/context-service';
     selector: 'top-nav',
     templateUrl: './top-nav.component.html',
     standalone: true,
-    imports: [NgIf, RouterModule, BsDropdownModule ]
+    imports: [NgIf, RouterModule, BsDropdownModule ],
+    styles: [`
+    .dropdown-menu {
+        min-width: 200px;
+        border-radius: 4px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      
+      .dropdown-menu li:hover {
+        background-color: #f8f9fa;
+      }
+      `]
 })
 export class TopNavComponent implements OnInit {
     constructor(private contextService: ContextService,

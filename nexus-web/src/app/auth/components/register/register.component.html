@@ -42,7 +42,7 @@
 
                 <div class="col-6 pr-16">
                     <label for="password" class="form-label">Password</label>
-                    <input type="text" id="password" class="form-control" formControlName="password"
+                    <input type="password" id="password" class="form-control" formControlName="password"
                         placeholder="Enter your password">
                     <validation-messages [validationMessages]="validationMessages.password"
                         [formController]="registerForm.get('password')" [isFormSubmitted]="isFormSubmitted">
@@ -51,7 +51,7 @@
 
                 <div class="col-6 pr-16">
                     <label for="confirmPassword" class="form-label">Confirm Password</label>
-                    <input type="text" id="confirmPassword" class="form-control" formControlName="confirmPassword"
+                    <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"
                         placeholder="Enter your confirm password">
                     <validation-messages [validationMessages]="validationMessages.confirmPassword"
                         [formController]="registerForm.get('confirmPassword')" [isFormSubmitted]="isFormSubmitted">

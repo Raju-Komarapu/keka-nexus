@@ -1,31 +1,49 @@
 <div class="d-flex flex-column align-items-center bg-secondary-subtle gap-4">
     <div class="m-1 py-2 w-100 d-flex justify-content-center bg-secondary-subtle sticky-lg-top">
-    <div class="filters-section w-75 bg-white my-2 d-flex align-items-center p-3 gap-4 rounded" style="height: 100px;">
-        <div>
-            <input type="text">
-        </div>
-        <div>
-            <input type="text">
-        </div>
-        <div>
-            <input type="text">
+    <div class="filters-section w-50 bg-white my-2 d-flex align-items-center p-3 gap-4 rounded" style="height: 100px;">
+        <div class="search-container d-flex">
+            <div class="search-input">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" placeholder="Job title or keyword">
+            </div>
+            <div class="search-input">
+                <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <input type="text" placeholder="City or country">
+            </div>
+            <div class="search-input">
+                <input type="text" placeholder="Department">
+            </div>
+            <div class="search-input">
+                <input type="text" placeholder="Job type">
+            </div>
         </div>
     </div>
 </div>
-    <div *ngIf="allJobs" class="w-75 bg-white rounded">
+    <div *ngIf="allJobs" class="w-50 bg-white rounded">
         <!-- <h1 class="text-center">Open Positions</h1> -->
         <a *ngFor="let job of allJobs" (click)="goTojob(job.id)"
-            class="job-element d-flex align-items-center justify-content-between p-4 border-bottom hover-bg-light text-black" style="cursor: pointer; text-decoration: none;">
+            class="job-element gap-4 d-flex align-items-center justify-content-between p-4 border-bottom hover-bg-light text-black" style="cursor: pointer; text-decoration: none;">
+            <div>
+                <i class="ph ph-building-office fs-1 text-secondary"></i>
+            </div>
             <div class="flex-grow-1">
                 <div class="d-flex align-items-center gap-2">
                     <h3 class="h5 mb-0">{{ job.title }}</h3>
                 </div>
                 <div class="d-flex gap-4 mt-2 text-secondary small">
-                    <span *ngIf="job.experience">{{job.experience}} yrs</span>
-                    <span *ngIf="!job.experience">Not Available</span>
+                    <span *ngIf="job.companyName">{{job.companyName}}</span>
+                    <span *ngIf="job.experience">{{job.experience}}</span>
                     <span>{{ getJobType(job.jobType) }}</span>
+                    <span *ngIf="job.salaryRangeFormat">{{job.salaryRangeFormat}} yrs</span>
                 </div>
             </div>
+            <div><span>{{job.publishedSinceDays}}</span> <span *ngIf="job.publishedSinceDays == 1"> day</span><span *ngIf="job.publishedSinceDays > 1"> days</span> ago</div>
         </a>
     </div>
 </div>

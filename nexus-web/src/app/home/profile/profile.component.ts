@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
     editMode: boolean = false;
 
     get candidateAddress () {
-        return this.candidateProfile.address ? `${this.candidateProfile.address.countryName}, ${this.candidateProfile.address.state}, ${this.candidateProfile.address.city}, ${this.candidateProfile.address.addressLine1}, ${this.candidateProfile.address.addressLine2}, ${this.candidateProfile.address.zip}` : '--';
+        return this.candidateProfile.address ? `${this.candidateProfile.address.addressLine1}, ${this.candidateProfile.address.city}, ${this.candidateProfile.address.state}, ${this.candidateProfile.address.countryName} - ${this.candidateProfile.address.zip}` : '--';
     }
 
     get fullName () {

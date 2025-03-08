@@ -13,7 +13,7 @@ import { SharedDataService } from '../../services/shared-data.service';
     standalone: true,
     styles: [`
     a:hover {
-        background-color: #e7f1f6;
+        background-color: #F8F9FA;
       }
     `],
     imports: [NgIf, NgFor]
@@ -27,13 +27,14 @@ export class AllJobsComponent implements OnInit {
             'https://dupli.kekad.com/careers/api/embedjobs/virat/active/841feddf-f587-4a22-9c14-401b22e58a46'
         ];
     tenantMappings = [
-        ['96b0f003-5600-4a23-9e06-1d9eec557a7d', 'Raju Technologies'], 
-        ['8ecd5c82-8c88-42f6-8c4c-61d865e3ecdb', 'Keka Technologies'], 
+        ['96b0f003-5600-4a23-9e06-1d9eec557a7d', 'Keka Technologies'], 
+        ['8ecd5c82-8c88-42f6-8c4c-61d865e3ecdb', 'Raju Technologies'], 
         ['2e5dc04b-e1be-4037-a11b-014831d2fdff', 'Sravanth Technologies Pvt Ltd'], 
         ['7f7b3afb-ddc4-4e7c-9a70-31046f05837d', 'Ravi Technologies']
     ]
         
     allJobs: Array<any> = [];
+    filteredJobs: any[];
 
     getJobType(jobType: JobType) {
         return JobType.getById(jobType);
@@ -52,16 +53,22 @@ export class AllJobsComponent implements OnInit {
                 {
                     for (let index = 0; index < 4; index++) {
                         var jobs = data[index];
-                        var tenantMapping = this.tenantMappings[0];
+                        var tenantMapping = this.tenantMappings[index];
                         jobs.forEach(data => {
                             data.tenantId = tenantMapping[0];
                             data.companyName = tenantMapping[1];
                         })
                         this.allJobs = [...this.allJobs, ...jobs]
+                        this.allJobs.sort((a, b) => {
+                            const dateDiff = a.publishedSinceDays - b.publishedSinceDays;
+                            if (dateDiff === 0) {
+                              return a.title.localeCompare(b.jobTitle);
+                            }
+                          
+                            return dateDiff;
+                          });
                     }
-                    // this.allJobs = data[0].forEach(element => {
-                        
-                    // });
+                    this.filteredJobs = this.allJobs;
                     this.sharedDataService.setData(this.allJobs);
                 }
             },

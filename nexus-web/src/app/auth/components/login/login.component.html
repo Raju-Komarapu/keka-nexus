@@ -15,7 +15,7 @@
 
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="text" id="password" class="form-control" formControlName="password"
+                <input type="password" id="password" class="form-control" formControlName="password"
                     placeholder="Enter your password">
                 <validation-messages [validationMessages]="validationMessages.password"
                     [formController]="loginForm.get('password')" [isFormSubmitted]="isFormSubmitted">
