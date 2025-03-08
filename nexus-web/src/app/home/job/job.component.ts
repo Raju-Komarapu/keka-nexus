@@ -90,6 +90,7 @@ export class JobComponent {
 		'What are the offsite locations?',
 		'What is the standard salary for an SDE II?'
 	];
+	isReadMore: boolean;
 
 
 	constructor(private ModalService: BsModalService) {
@@ -102,6 +103,20 @@ export class JobComponent {
 
 	getJobLocation() {
 		return this.job.jobLocations.map(_ => _.city).join(', ');;
+	}
+
+	openReadMoreDescription(){
+		this.isReadMore = true;
+		var description = document.getElementById('jobdecription');
+		description.classList.remove('overflow-hidden')
+		description.classList.add('h-100')
+	}
+
+	openReadLessDescription(){
+		this.isReadMore = false;
+		var description = document.getElementById('jobdecription');
+		description.classList.add('overflow-hidden')
+		description.classList.remove('h-100')
 	}
 
 	OpenAIChatbot() {
