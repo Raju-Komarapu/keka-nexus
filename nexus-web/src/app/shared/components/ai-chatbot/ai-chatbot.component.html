@@ -1,31 +1,35 @@
-<div class="modal-right container">
-    <div class="modal-header">
-      <div class="company-info">
-        <img src="..\assets\wand.svg" alt="Company Logo" class="company-logo">
-        <span class="company-name">Koka AI</span>
+<div class="modal-right container p-0">
+    <div class="modal-header d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center justify-content-center">
+        <img src="..\assets\wand.svg" alt="Company Logo">
+        <span class="mx-2" style="font-weight: 510; font-size: 16px;">Keka AI</span>
       </div>
-      <button class="close-button" (click)="closeChat()">×</button>
+      <div style="cursor: pointer;" (click)="closeChat()">
+        <i class="ph ph-x fs-5"></i>
+      </div>
     </div>
     <div class="modal-body">
-      <div class="chat-messages">
-        <div class="welcome-message">
-          <h2>What do you want to know?</h2>
+      <div style="height: 420px;">
+        
+      </div>
+      <div>
+        <h5 class="text-center py-1">What do you want to know?</h5>
+        <div class="d-flex justify-content-between position-relative">
+          <input type="text" 
+                class="px-2 py-3 rounded border-1"
+                style="width: 100%;"
+                [(ngModel)]="userMessage" 
+                placeholder="Ask anything about the company..."
+                (keyup.enter)="sendMessage()"
+                >
+          <div (click)="sendMessage()" class="p-1 bg-light rounded-circle position-absolute top-50 translate-middle-y" style="cursor: pointer; right: 8px;"><i class="ph ph-arrow-right fs-5"></i></div>
         </div>
-      </div>
-
-      <div class="suggested-questions">
-        <button class="question-button" *ngFor="let question of suggestedQuestions" 
-                (click)="askQuestion(question)">
-          {{ question }}
-        </button>
-      </div>
-
-      <div class="chat-input">
-        <input type="text" 
-              [(ngModel)]="userMessage" 
-              placeholder="Ask anything about the company..."
-              (keyup.enter)="sendMessage()">
-        <button class="send-button" (click)="sendMessage()">→</button>
-      </div>
+        <div class="py-2 d-flex flex-wrap">
+          <div class="px-2 py-1 m-1" style="border: solid 1px #5746AF;; border-radius: 500px; color: #5746AF; cursor: pointer; background-color: #F5F2FF;" *ngFor="let question of suggestedQuestions" 
+                  (click)="askQuestion(question)">
+            {{ question }}
+        </div>
+        </div>
+      </div>  
     </div>
   </div>
