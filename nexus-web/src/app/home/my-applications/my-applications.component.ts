@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { JobApplicationService } from '../../shared/services/job-applications.services';
 import { Router } from '@angular/router';
 import { SharedDataService } from '../../shared/services/shared-data.service';
-import { JobType } from '../../shared/models/enums.model';
+import { ApplicationStatus, JobType } from '../../shared/models/enums.model';
 
 interface Interview {
     company: string;
@@ -48,6 +48,17 @@ interface Interview {
       margin: 4px 0;
       color: #666;
     }
+
+    .status-button {
+        background-color: #e6f7ff; /* Light blue background */
+        color: #007bff; /* Blue text color */
+        border: 1px solid #007bff; /* Blue border */
+        border-radius: 20px; /* Rounded edges */
+        padding: 5px 15px; /* Padding for button */
+        font-size: 14px; /* Text size */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
   `]
 })
 export class MyApplicationsComponent {
@@ -72,6 +83,7 @@ export class MyApplicationsComponent {
         }
     ];
     allJobs: any;
+    isLoaded: boolean = false;
 
     constructor(private jobApplicationService: JobApplicationService,
         private sharedDataService: SharedDataService,
@@ -97,7 +109,12 @@ export class MyApplicationsComponent {
             this.applications.forEach(application => {
                 application.job = this.allJobs.find(job => job.id == application.jobId);
             });
+            this.isLoaded = true;
         });
+    }
+
+    getApplicationStatus(status) {
+        return ApplicationStatus.getById(status);
     }
 
     getJobType(jobType: JobType) {
