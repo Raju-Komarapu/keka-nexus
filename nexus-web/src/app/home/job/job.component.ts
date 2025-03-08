@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AIChatbotComponent } from '../../shared/components/ai-chatbot/ai-chatbot.component';
-import { JobType } from 'src/app/shared/models/enums.model';
+import { ApplicationStatus, JobType } from '../../shared/models/enums.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SharedDataService } from '../../shared/services/shared-data.service';
+import { JobApplicationService } from '../../shared/services/job-applications.services';
+import { NotificationService } from '../../shared/services/notification.service';
 
 interface Mentor {
 	name: string;
@@ -15,50 +19,17 @@ interface Mentor {
 @Component({
 	selector: 'app-job',
 	standalone: true,
-	imports: [CommonModule],
-	providers: [BsModalService],
+	imports: [ CommonModule],
+	providers: [DatePipe, BsModalService, JobApplicationService],
 	templateUrl: './job.component.html',
 	styleUrls: ['./job.component.css']
 })
 export class JobComponent {
-	job: any = {
-		"id": 31314,
-		"title": "jt",
-		"description": "<div><strong>&nbsp;</strong></div><div>We aspire to build a high-quality, innovative &amp; robust software.&nbsp;If you are a hands-on platform builder with significant experience in developing scalable data platforms, look no further. Click on Apply and we will reach out to you soon.</div><div>&nbsp;</div><div><strong>Your responsibilities as an Engineer:&nbsp;</strong></div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines operational feasibility by evaluating analysis, problem definition, requirements, solution development, and proposed solutions.</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documents and demonstrates solutions by developing documentation, flowcharts, layouts, diagrams, charts, code comments and clear code.</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepares and installs solutions by determining and designing system specifications, standards, and programming.</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Improves operations by conducting systems analysis; recommending changes in policies and procedures.</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains and licenses software by obtaining required information from vendors; recommending purchases; testing and approving products.</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates job knowledge by studying state-of-the-art development tools, programming techniques, and computing equipment</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Participate in educational opportunities &amp; read professional publications;</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Protects operations by keeping information confidential.</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provides information by collecting, analyzing, and summarizing development and service issues.</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accomplishes engineering and organization mission by completing related results as needed.</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Develops software solutions by studying information needs; conferring with users; studying systems flow, data usage, and work processes; investigating problem areas; following the software development lifecycle.</div><div>&nbsp;</div><div>&nbsp;</div><div><strong>Skill sets we require:</strong></div><div>&nbsp;</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Proven work experience as a Software Engineer or Software Developer</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Experience designing interactive applications</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ability to develop software in Java, Ruby on Rails, C++ or other programming languages</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excellent knowledge of relational databases, SQL and ORM technologies (JPA2, Hibernate)</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Experience developing web applications using at least one popular web framework (JSF, Wicket, GWT, Spring MVC)</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Experience with test-driven development</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Proficiency in software engineering tools</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ability to document requirements and specifications</div><div>&nbsp;</div><div><strong>Experience &amp; Pedigree:&nbsp;</strong></div><div>&nbsp;</div><div>•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bachelor’s/Master’s degree in Computer Science Engineering or equivalent&nbsp;</div>",
-		"departmentId": 24133,
-		"departmentName": "LOCAL",
-		"jobLocations": [
-			{
-				"id": 5857,
-				"name": "SKJSD",
-				"city": "JSD",
-				"state": "WB",
-				"countryCode": "IN",
-				"countryName": "India"
-			}
-		],
-		"jobType": 2,
-		"experience": "5",
-		"jobNumber": "DUP2655HIRO!",
-		"salaryRange": {
-			"currency": "INR",
-			"salaryPeriod": 0,
-			"cultureInfo": "en-IN"
-		},
-		"salaryRangeFormat": "",
-		"publishedOn": "2025-01-28T05:26:28.997Z",
-		"publishedSinceDays": 38
-	}
+	job: any;
 
 	applicationDate = 'Jan 23, 2023';
-
-	stages = [
-		{ name: 'Application submitted', completed: true },
-		{ name: 'Application under review', completed: false },
-		{ name: 'Interview', completed: false },
-		{ name: 'Offer letter', completed: false },
-		{ name: 'Hired', completed: false }
-	];
+	applicationStatus = ApplicationStatus.getAll();
+	jobApplicationLogs: any = [];
 
 	mentors: Mentor[] = [
 		{
@@ -91,10 +62,43 @@ export class JobComponent {
 		'What is the standard salary for an SDE II?'
 	];
 	isReadMore: boolean;
+	jobId: string;
+	jobs: any;
+	jobApplication: any;
 
 
-	constructor(private ModalService: BsModalService) {
+	constructor(private ModalService: BsModalService,
+		private route: ActivatedRoute,
+		private router: Router,
+		private datePipe: DatePipe,
+		private sharedDataService: SharedDataService,
+		private notificationService: NotificationService, 
+		private jobApplicationService: JobApplicationService) {
+		this.getJob();
+	}
 
+	getJob() {
+		this.route.paramMap.subscribe(params => {
+			this.jobId = params.get('jobId');
+			this.getMyJobApplication();
+		});
+		this.sharedDataService.getData().subscribe(data => {
+			this.jobs = data;
+			this.job = this.jobs.find(_ => _.id == this.jobId)
+		});
+	}
+
+	getStageCompletion(stage) {
+		return this.jobApplicationLogs?.find(_ => _.status == stage.id)?.isCompleted;
+	}
+
+	getStageCompletionDate(stage) {
+		var date = this.jobApplicationLogs?.find(_ => _.status == stage.id)?.completedOn;
+		return this.datePipe.transform(date, 'MMM d, yyyy');
+	}
+
+	getStageName(stage) {
+		return stage.title;
 	}
 
 	getJobType(jobType: JobType) {
@@ -105,14 +109,52 @@ export class JobComponent {
 		return this.job.jobLocations.map(_ => _.city).join(', ');;
 	}
 
-	openReadMoreDescription(){
+	getMyJobApplication() {
+		this.jobApplicationService.getAllJobApplications().subscribe(data => {
+			this.jobApplication = data.find(_ => _.jobId == this.jobId);
+			this.jobApplicationLogs = this.jobApplication?.applicationStatusLog;
+		});
+	}
+	
+	applyJob() {
+		var jobApplication =  {
+			"jobId": this.jobId,
+			"tenantId": this.job.tenantId,
+			"applicationStatus": ApplicationStatus.New,
+			"ApplicationStatusLog": []
+		  };
+		this.jobApplicationService.addJobApplications(jobApplication).subscribe({
+			next: (data: boolean) => {
+                if (!data) {
+                    this.notificationService.error("Error", "Error in applying for job");
+                    return;
+                }
+				this.notificationService.success("Success", "Successfully applied for job");
+				this.getJob();
+            },
+            error: (err) => {
+                this.notificationService.error("Error", err?.message ?? "Error in applying for job")
+            }
+		});
+	}
+
+	goBack() {
+		var previousRoute = localStorage.getItem('previousRoute');
+		if (previousRoute) {
+			this.router.navigate([previousRoute]);
+		} else {
+			this.router.navigate(['./home']);
+		}
+	}
+
+	openReadMoreDescription() {
 		this.isReadMore = true;
 		var description = document.getElementById('jobdecription');
 		description.classList.remove('overflow-hidden')
 		description.classList.add('h-100')
 	}
 
-	openReadLessDescription(){
+	openReadLessDescription() {
 		this.isReadMore = false;
 		var description = document.getElementById('jobdecription');
 		description.classList.add('overflow-hidden')

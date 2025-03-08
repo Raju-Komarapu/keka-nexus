@@ -14,8 +14,7 @@
 
 .job-header {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
     margin-bottom: 15px;
 }
 
@@ -131,6 +130,7 @@
 .container-2 {
     display: flex;
     justify-content: space-between;
+    margin: 24px 0px;
 
 }
 

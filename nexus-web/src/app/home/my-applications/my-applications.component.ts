@@ -1,29 +1,24 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface Application {
-  company: string;
-  position: string;
-  location: string;
-  experience: string;
-  type: string;
-  status: string;
-}
+import { JobApplicationService } from '../../shared/services/job-applications.services';
+import { Router } from '@angular/router';
+import { SharedDataService } from '../../shared/services/shared-data.service';
+import { JobType } from '../../shared/models/enums.model';
 
 interface Interview {
-  company: string;
-  position: string;
-  date: string;
-  time: string;
-  platform: string;
+    company: string;
+    position: string;
+    date: string;
+    time: string;
+    platform: string;
 }
 
 @Component({
-  selector: 'app-my-applications',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './my-applications.component.html',
-  styles: [`
+    selector: 'app-my-applications',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './my-applications.component.html',
+    styles: [`
     .applications-container {
       margin: 0 auto;
     }
@@ -56,49 +51,62 @@ interface Interview {
   `]
 })
 export class MyApplicationsComponent {
-  activeTab = 'active';
+    activeTab = 'active';
 
-  applications: Application[] = [
-    {
-      company: 'LinkedIn',
-      position: 'Senior Software Engineer',
-      location: 'Hyderabad',
-      experience: '4-7 yrs',
-      type: 'Full time',
-      status: 'Interview'
-    },
-    {
-      company: 'Airbnb',
-      position: 'Principle Software Engineer',
-      location: 'Hyderabad',
-      experience: '5-9 yrs',
-      type: 'Full time',
-      status: 'Interview'
-    },
-    {
-      company: 'Tech lead',
-      position: 'Tech lead',
-      location: 'Hyderabad',
-      experience: '6-9 yrs',
-      type: 'Full time',
-      status: 'Application submitted'
-    }
-  ];
+    applications: any = [];
 
-  interviews: Interview[] = [
-    {
-      company: 'Tech lead',
-      position: 'Senior Software Engineer',
-      date: 'Jul 18',
-      time: '9:30am - 10:30am',
-      platform: 'Google meet'
-    },
-    {
-      company: 'Tech lead',
-      position: 'Principle Software Engineer',
-      date: 'Jul 20',
-      time: '2:30pm - 3:30pm',
-      platform: 'Google meet'
+    interviews: Interview[] = [
+        {
+            company: 'Tech lead',
+            position: 'Senior Software Engineer',
+            date: 'Jul 18',
+            time: '9:30am - 10:30am',
+            platform: 'Google meet'
+        },
+        {
+            company: 'Tech lead',
+            position: 'Principle Software Engineer',
+            date: 'Jul 20',
+            time: '2:30pm - 3:30pm',
+            platform: 'Google meet'
+        }
+    ];
+    allJobs: any;
+
+    constructor(private jobApplicationService: JobApplicationService,
+        private sharedDataService: SharedDataService,
+        private router: Router) {
+        this.sharedDataService.getData().subscribe(data => {
+            this.allJobs = data;
+            this.getAllJobApplication()
+        });
     }
-  ];
+
+    goTojob(jobId: number) {
+        localStorage.setItem('previousRoute', this.router.url)
+        this.router.navigate([`./home/job/${jobId}`])
+    }
+
+    getJobLocations(job) {
+		return job != null ? job.jobLocations.map(_ => _.city).join(', ') : [];
+	}
+
+    getAllJobApplication() {
+        this.jobApplicationService.getAllJobApplications().subscribe(data => {
+            this.applications = data;
+            this.applications.forEach(application => {
+                application.job = this.allJobs.find(job => job.id == application.jobId);
+            });
+        });
+    }
+
+    getJobType(jobType: JobType) {
+		return JobType.getById(jobType);
+	}
+
+    goToHome() {
+        this.router.navigate(['/home']);
+    }
+
+
 }

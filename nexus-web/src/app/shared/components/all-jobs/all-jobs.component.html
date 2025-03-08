@@ -14,8 +14,8 @@
 </div>
     <div *ngIf="allJobs" class="w-75 bg-white rounded">
         <!-- <h1 class="text-center">Open Positions</h1> -->
-        <div *ngFor="let job of allJobs"
-            class="d-flex align-items-center justify-content-between p-4 border-bottom hover-bg-light">
+        <a *ngFor="let job of allJobs" (click)="goTojob(job.id)"
+            class="job-element d-flex align-items-center justify-content-between p-4 border-bottom hover-bg-light text-black" style="cursor: pointer; text-decoration: none;">
             <div class="flex-grow-1">
                 <div class="d-flex align-items-center gap-2">
                     <h3 class="h5 mb-0">{{ job.title }}</h3>
@@ -26,6 +26,6 @@
                     <span>{{ getJobType(job.jobType) }}</span>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>

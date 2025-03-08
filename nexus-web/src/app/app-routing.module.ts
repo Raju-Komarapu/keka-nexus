@@ -25,7 +25,7 @@ const routes: Routes = [
                 path: 'profile', component: ProfileComponent, canActivate: [authGuard]
             },
             {
-                path: 'job', component: JobComponent
+                path: 'job/:jobId', component: JobComponent
             },
             {
                 path: 'my-applications', component: MyApplicationsComponent

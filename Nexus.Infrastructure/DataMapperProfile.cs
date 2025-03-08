@@ -28,6 +28,6 @@ public class DataMapperProfile: Profile
             .ForMember(d => d.ApplicationStatusLog, opt => opt.MapFrom(src => src.ApplicationStatusLog.ToJson()))
             .ReverseMap()
             .ForMember(d => d.ApplicationStatus, opt => opt.MapFrom(src => (ApplicationStatus)src.ApplicationStatus))
-            .ForMember(d => d.ApplicationStatusLog, opt => opt.MapFrom(src => src.ApplicationStatusLog.FromJson<ApplicationStatusLog>()));
+            .ForMember(d => d.ApplicationStatusLog, opt => opt.MapFrom(src => src.ApplicationStatusLog.FromJson<List<ApplicationStatusLog>>()));
     }
 }

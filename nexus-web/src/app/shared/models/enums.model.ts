@@ -23,3 +23,17 @@ export class JobType extends Enum {
     static 1 = 'Part Time';
     static 2 = 'Full Time';
 }
+
+export class ApplicationStatus extends Enum {
+    static New = 0;
+    static Screening = 1;
+    static Interview = 2;
+    static Offered = 3;
+    static Hired = 4;
+    static Archived = 5;
+    static 0 = 'Application submitted';
+    static 1 = 'Application under review';
+    static 2 = 'Interview';
+    static 3 = 'Offer letter';
+    static 4 = 'Hired';
+}
