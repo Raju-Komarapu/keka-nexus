@@ -1,34 +1,30 @@
 <div class="d-flex flex-column align-items-center bg-secondary-subtle gap-4">
-    <div class="filters-section w-75 h-50 bg-white rounded p-4 mt-3">
+    <div class="m-1 py-2 w-100 d-flex justify-content-center bg-secondary-subtle sticky-lg-top">
+    <div class="filters-section w-75 bg-white my-2 d-flex align-items-center p-3 gap-4 rounded" style="height: 100px;">
+        <div>
+            <input type="text">
+        </div>
+        <div>
+            <input type="text">
+        </div>
         <div>
             <input type="text">
         </div>
     </div>
-    <div *ngIf="allJobs" class="py-4 px-5 w-75 bg-white rounded">
+</div>
+    <div *ngIf="allJobs" class="w-75 bg-white rounded">
         <!-- <h1 class="text-center">Open Positions</h1> -->
-        <div *ngFor="let job of allJobs" 
-            class="container py-3 job-list-item" 
-            style="cursor: pointer; height: 70px;">
-            <div class="d-flex align-items-center gap-2">
-                <div><i class="ph ph-building-office fs-1 text-secondary"></i></div>
-                <div class="">
-                    <h4 class="h5 mb-0">{{ job.title }}</h4>
-                    <span>at LinkedIn</span>
+        <div *ngFor="let job of allJobs"
+            class="d-flex align-items-center justify-content-between p-4 border-bottom hover-bg-light">
+            <div class="flex-grow-1">
+                <div class="d-flex align-items-center gap-2">
+                    <h3 class="h5 mb-0">{{ job.title }}</h3>
                 </div>
-                <!-- <i class="ph ph-building-office"></i>
-                <div class="col-6">
-                    <h4 class="h5 mb-0">{{ job.title }}</h4>
-                </div>
-                <div class="col">
+                <div class="d-flex gap-4 mt-2 text-secondary small">
                     <span *ngIf="job.experience">{{job.experience}} yrs</span>
                     <span *ngIf="!job.experience">Not Available</span>
-                </div>
-                <div class="col">
                     <span>{{ getJobType(job.jobType) }}</span>
                 </div>
-                <div class="col">
-                    <span>Hyderabad</span>
-                </div> -->
             </div>
         </div>
     </div>
