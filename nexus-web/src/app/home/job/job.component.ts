@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 import { JobApplicationService } from '../../shared/services/job-applications.services';
 import { NotificationService } from '../../shared/services/notification.service';
+import { ContextService } from 'src/app/context/context-service';
 
 interface Mentor {
 	name: string;
@@ -19,7 +20,7 @@ interface Mentor {
 @Component({
 	selector: 'app-job',
 	standalone: true,
-	imports: [ CommonModule],
+	imports: [CommonModule],
 	providers: [DatePipe, BsModalService, JobApplicationService],
 	templateUrl: './job.component.html',
 	styleUrls: ['./job.component.css']
@@ -69,10 +70,11 @@ export class JobComponent {
 
 	constructor(private ModalService: BsModalService,
 		private route: ActivatedRoute,
+		private contextService: ContextService,
 		private router: Router,
 		private datePipe: DatePipe,
 		private sharedDataService: SharedDataService,
-		private notificationService: NotificationService, 
+		private notificationService: NotificationService,
 		private jobApplicationService: JobApplicationService) {
 		this.getJob();
 	}
@@ -110,32 +112,39 @@ export class JobComponent {
 	}
 
 	getMyJobApplication() {
-		this.jobApplicationService.getAllJobApplications().subscribe(data => {
-			this.jobApplication = data.find(_ => _.jobId == this.jobId);
-			this.jobApplicationLogs = this.jobApplication?.applicationStatusLog;
-		});
+		if (this.contextService.getUser()) {
+			this.jobApplicationService.getAllJobApplications().subscribe(data => {
+				this.jobApplication = data.find(_ => _.jobId == this.jobId);
+				this.jobApplicationLogs = this.jobApplication?.applicationStatusLog;
+			});
+		}
 	}
-	
+
 	applyJob() {
-		var jobApplication =  {
-			"jobId": this.jobId,
-			"tenantId": this.job.tenantId,
-			"applicationStatus": ApplicationStatus.New,
-			"ApplicationStatusLog": []
-		  };
-		this.jobApplicationService.addJobApplications(jobApplication).subscribe({
-			next: (data: boolean) => {
-                if (!data) {
-                    this.notificationService.error("Error", "Error in applying for job");
-                    return;
-                }
-				this.notificationService.success("Success", "Successfully applied for job");
-				this.getJob();
-            },
-            error: (err) => {
-                this.notificationService.error("Error", err?.message ?? "Error in applying for job")
-            }
-		});
+		if (this.contextService.getUser()) {
+			var jobApplication = {
+				"jobId": this.jobId,
+				"tenantId": this.job.tenantId,
+				"applicationStatus": ApplicationStatus.New,
+				"ApplicationStatusLog": []
+			};
+			this.jobApplicationService.addJobApplications(jobApplication).subscribe({
+				next: (data: boolean) => {
+					if (!data) {
+						this.notificationService.error("Error", "Error in applying for job");
+						return;
+					}
+					this.notificationService.success("Success", "Successfully applied for job");
+					this.getJob();
+				},
+				error: (err) => {
+					this.notificationService.error("Error", err?.message ?? "Error in applying for job")
+				}
+			});
+		}
+		else {
+			this.router.navigate(['./login']);
+		}
 	}
 
 	goBack() {

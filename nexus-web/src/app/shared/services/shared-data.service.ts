@@ -17,8 +17,8 @@ export class SharedDataService {
         ];
 
     tenantMappings = [
-        ['96b0f003-5600-4a23-9e06-1d9eec557a7d', 'Raju Technologies'],
-        ['8ecd5c82-8c88-42f6-8c4c-61d865e3ecdb', 'Keka Technologies'],
+        ['96b0f003-5600-4a23-9e06-1d9eec557a7d', 'Keka Technologies'],
+        ['8ecd5c82-8c88-42f6-8c4c-61d865e3ecdb', 'Raju Technologies'],
         ['2e5dc04b-e1be-4037-a11b-014831d2fdff', 'Sravanth Technologies Pvt Ltd'],
         ['7f7b3afb-ddc4-4e7c-9a70-31046f05837d', 'Ravi Technologies']
     ]
