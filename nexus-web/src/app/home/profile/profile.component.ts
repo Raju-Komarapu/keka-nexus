@@ -30,8 +30,6 @@ export class ProfileComponent implements OnInit {
     }
 
     getCandidateProfileDetails() {
-        this.candidateProfile = candiadateProfile;
-        return;
         this.candidateProfileService.getCandidateDetails().subscribe({
             next: (data) => {
                 this.candidateProfile = data;

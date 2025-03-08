@@ -3,15 +3,15 @@
         <div style="width: 1024px;">
             <a href="#/home/my-applications" class="back-link">← View all applications</a>
             <div class="job-header">
-                <div>Linkedin</div>
-                <div class="job-title">{{ jobTitle }}</div>
+                <div>{{job.CompanyName}}</div>
+                <div class="job-title">{{ job.title }}</div>
             </div>
 
             <div class="job-meta">
-                <span><i class="ph ph-user"></i> {{ experience }}</span>
-                <span><i class="ph ph-map-pin"></i> {{ location }}</span>
-                <span><i class="ph ph-suitcase"></i> {{ type }}</span>
-                <span><i class="ph ph-money"></i> {{ salary }}</span>
+                <span *ngIf="job.experience"><i class="ph ph-user"></i> {{ job.experience }}</span>
+                <span *ngIf="job.jobLocations.length"><i class="ph ph-map-pin"></i> {{ getJobLocation() }}</span>
+                <span *ngIf="job.jobType"><i class="ph ph-suitcase"></i> {{ getJobType(job.jobType) }}</span>
+                <span *ngIf="job.salaryRangeFormat"><i class="ph ph-money"></i> {{ job.salaryRangeFormat }}</span>
             </div>
         </div>
     </div>
@@ -33,22 +33,11 @@
 
             <div class="container-2">
                 <div class="job-description">
-                    <h3>Job description</h3>
-                    <p class="summary">
-                        Summary:<br>
-                        We are seeking a talented and experienced Associate Product Designer to join our dynamic product
-                        team.
-                        The
-                        ideal candidate will have at least 4 years of experience in the product department and a strong
-                        passion
-                        for
-                        creating innovative and user-friendly designs. As an Associate Product Designer, you will work
-                        closely
-                        with
-                        our product managers and engineers to bring our product vision to life through thoughtful and
-                        visually
-                        appealing designs.
-                    </p>
+                    <div class="job-description-content">
+                        <h3>Job description</h3>
+                        <p class="summary" [innerHtml]="job.description">
+                        </p>
+                    </div>
                     <button class="read-more">Read more</button>
                     <div class="working-hours">
                         <div class="question">

@@ -13,6 +13,6 @@ export class CandidateProfileService {
     constructor(private httpClient: HttpClient) { }
 
     getCandidateDetails(): Observable<CandidateProfile> {
-        return this.httpClient.get<CandidateProfile>(`${this.apiUrl}`);
+        return this.httpClient.get<CandidateProfile>(`${this.apiUrl}/me`);
     }
 }
