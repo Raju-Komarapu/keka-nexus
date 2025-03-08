@@ -31,6 +31,7 @@ public class CandidateProfileRepository(DatabaseContext Db, IMapper mapper)
     {
         var dbCandidateProfile = this.Mapper.Map<DbCandidateProfile>(candidateProfile);
         dbCandidateProfile.ModifiedOn = DateTime.UtcNow;
+        dbCandidateProfile.IsProfileUpdated = true;
         return this.Db.Connection.Execute(CandidateProfileQueries.UpdateCandidateProfile, dbCandidateProfile) == 1;
     }
 

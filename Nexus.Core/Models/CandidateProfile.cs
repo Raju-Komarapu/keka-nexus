@@ -13,6 +13,7 @@ public class CandidateProfile
     public string CurrentSalary { get; set; }
     public Address Address { get; set; }
     public string CurrentLocation { get; set; }
+    public bool IsProfileUpdated { get; set; }
     public PreferredLocation PreferredLocation { get; set; }
     public IEnumerable<ExperienceDetails> Experience { get; set; }
     public IEnumerable<EducationDetails> Education { get; set; }

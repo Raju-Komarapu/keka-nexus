@@ -8,12 +8,14 @@ import { SharedDataService } from '../../shared/services/shared-data.service';
 import { JobApplicationService } from '../../shared/services/job-applications.services';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService } from '../../auth/services/auth.service';
+import { ContextService } from '../../context/context-service';
+import { User } from '../../context/user';
 
 interface Mentor {
 	name: string;
 	role: string;
 	experience: string;
-	rating: number;
+	rating: Array<any>;
 	image: string;
 }
 
@@ -34,25 +36,25 @@ export class JobComponent implements OnInit {
 
 	mentors: Mentor[] = [
 		{
-			name: 'Vanita Kumar',
-			role: 'Full Stack Developer',
-			experience: '12 Years Experience',
-			rating: 4,
-			image: 'https://avatar.iran.liara.run/public'
-		},
-		{
 			name: 'Vinod Kumar',
 			role: 'Full Stack Developer',
-			experience: '12 Years Experience',
-			rating: 4,
-			image: 'https://avatar.iran.liara.run/public'
+			experience: '6 Years Experience',
+			rating: [1, 2, 3, 4, 5],
+			image: 'https://avatar.iran.liara.run/public/boy'
 		},
 		{
-			name: 'Vinod Kumar',
+			name: 'Vrishti Jain',
 			role: 'Full Stack Developer',
-			experience: '12 Years Experience',
-			rating: 4,
-			image: 'https://avatar.iran.liara.run/public'
+			experience: '5 Years Experience',
+			rating: [1, 2, 3, 4],
+			image: 'https://avatar.iran.liara.run/public/girl'
+		},
+		{
+			name: 'Tharun Gade',
+			role: 'Full Stack Developer',
+			experience: '3 Years Experience',
+			rating: [1, 2, 3],
+			image: 'https://avatar.iran.liara.run/public/boy'
 		}
 	];
 
@@ -67,6 +69,7 @@ export class JobComponent implements OnInit {
 	jobs: any;
 	jobApplication: any;
 	currentQuestionInd = 0;
+	user: User;
 
 	ngOnInit(): void {
 		setInterval(() => { this.currentQuestionInd = (this.currentQuestionInd + 1) % 4 }, 2000);
@@ -75,12 +78,14 @@ export class JobComponent implements OnInit {
 	constructor(private ModalService: BsModalService,
 		private route: ActivatedRoute,
 		private authService: AuthService,
+		private contextService: ContextService,
 		private router: Router,
 		private datePipe: DatePipe,
 		private sharedDataService: SharedDataService,
 		private notificationService: NotificationService,
 		private jobApplicationService: JobApplicationService) {
 		this.getJob();
+		this.user = this.contextService.getUser(); 
 	}
 
 	getJob() {

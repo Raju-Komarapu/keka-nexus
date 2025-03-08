@@ -20,6 +20,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     a:hover {
         background-color: #F8F9FA;
       }
+
+      ul li:hover {
+        background-color: #F8F9FA;
+      }
     `],
     imports: [NgIf, NgFor, FormsModule, NgSelectModule, BsDropdownModule]
 })
@@ -42,11 +46,12 @@ export class AllJobsComponent implements OnInit {
         searchKey: '',
         location: '',
         department: [],
-        companyName: ''
+        companyName: []
     }
 
     allJobs: Array<any> = [];
     filteredJobs: any[];
+    companies: any[];
 
     getJobType(jobType: JobType) {
         return JobType.getById(jobType);
@@ -54,6 +59,14 @@ export class AllJobsComponent implements OnInit {
 
     get selectedDepartmentsName() {
         const concatenatedNames = this.filters.department.join(', ');
+        const maxLength = 25;
+        return concatenatedNames.length > maxLength
+            ? concatenatedNames.substring(0, maxLength - 3) + '...'
+            : concatenatedNames;
+    }
+
+    get selectedCompanyName() {
+        const concatenatedNames = this.filters.companyName.join(', ');
         const maxLength = 25;
         return concatenatedNames.length > maxLength
             ? concatenatedNames.substring(0, maxLength - 3) + '...'
@@ -91,6 +104,7 @@ export class AllJobsComponent implements OnInit {
                     this.filteredJobs = this.allJobs;
                     this.sharedDataService.setData(this.allJobs);
                     this.setDepartments();
+                    this.setCompanies();
                 }
             },
             error: (err) => {
@@ -103,12 +117,27 @@ export class AllJobsComponent implements OnInit {
         this.departments = [...new Set(this.allJobs.map(job => job.departmentName))];
     }
 
+    setCompanies() {
+        this.companies = [...new Set(this.allJobs.map(job => job.companyName))];
+    }
+
     onDepartmentChange(event: any, department: string) {
         if (event.target.checked) {
             this.filters.department = [...this.filters.department, department];
         } else {
             this.filters.department = this.filters.department.filter(
                 (dept) => dept !== department
+            );
+        }
+        this.onFiltersUpdated();
+    }
+
+    onCompanyChange(event: any, company: string) {
+        if (event.target.checked) {
+            this.filters.companyName = [...this.filters.companyName, company];
+        } else {
+            this.filters.companyName = this.filters.companyName.filter(
+                (companyname) => companyname !== company
             );
         }
         this.onFiltersUpdated();
@@ -139,8 +168,9 @@ export class AllJobsComponent implements OnInit {
             const departmentMatch = this.filters.department.length === 0 ||
                 this.filters.department.includes(job.departmentName);
 
-            const companyNameMatch = !this.filters.companyName ||
-                String(job.companyName).toLowerCase().includes(this.filters.companyName.toLowerCase());
+            const companyNameMatch = this.filters.companyName.length === 0 ||
+                this.filters.companyName.includes(job.companyName);
+
 
             return searchKeyMatch && locationMatch && departmentMatch && companyNameMatch;
         });

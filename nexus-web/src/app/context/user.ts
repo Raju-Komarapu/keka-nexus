@@ -4,4 +4,5 @@ export class User {
     userIdentifier: string;
     displayName: string;
     email: string;
+    isProfileUpdated: boolean;
   }

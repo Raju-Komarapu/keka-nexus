@@ -2,9 +2,9 @@
     <div class="mx-5 w-50" *ngIf="candidateForm">
         <div class="bg-white mt-3 p-4 d-flex align-items-center justify-content-between">
             <div class="fs-4">Edit Profile</div>
-            <div>
-                <button (click)="save()" class="btn btn-outline-primary">Save</button>
-                <button (click)="cancel()" class="ms-2 btn btn-outline-primary">Cancel</button>
+            <div class="d-flex gap-2">
+                <button class="session-button" (click)="save()">Save</button>
+                <button class="session-button" (click)="cancel()">Cancel</button>
             </div>
         </div>
         <div [formGroup]="candidateForm">
@@ -113,7 +113,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-6 col-lg-4">
                         <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" formControlName="email">
+                        <input type="text" [disabled]="isDisabled" class="form-control disabled pointer-events-none" name="email" formControlName="email">
                         <validation-messages [validationMessages]="validationMessages.email"
                             [formController]="candidateForm.get('email')" [isFormSubmitted]="isFormSubmitted">
                         </validation-messages>

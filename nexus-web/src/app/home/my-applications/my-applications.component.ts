@@ -50,9 +50,9 @@ interface Interview {
     }
 
     .status-button {
-        background-color: #e6f7ff; /* Light blue background */
-        color: #007bff; /* Blue text color */
-        border: 1px solid #007bff; /* Blue border */
+        background-color: #e7fad3; /* Light blue background */
+        color: #7dbb3c; /* Blue text color */
+        border: 1px solid #7dbb3c; /* Blue border */
         border-radius: 20px; /* Rounded edges */
         padding: 5px 15px; /* Padding for button */
         font-size: 14px; /* Text size */

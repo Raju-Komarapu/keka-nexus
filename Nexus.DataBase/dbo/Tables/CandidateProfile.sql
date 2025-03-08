@@ -9,6 +9,7 @@
 	DateOfBirth			DATE				NULL,
 	ExpectedSalary		NVARCHAR(32)		NULL,
 	CurrentSalary		NVARCHAR(32)		NULL,
+	IsProfileUpdated	BIT					NOT NULL DEFAULT(0),
 	[Address]			NVARCHAR(MAX)		NULL,
 	CurrentLocation		NVARCHAR(MAX)		NULL,
 	PreferredLocation	NVARCHAR(MAX)		NULL,

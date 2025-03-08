@@ -11,4 +11,6 @@ public interface IRequestContext
     public string DisplayName { get; set; }
 
     public string Email { get; set; }
+
+    public bool IsProfileUpdated { get; set; }
 }

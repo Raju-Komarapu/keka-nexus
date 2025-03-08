@@ -27,6 +27,7 @@ internal static class CandidateProfileQueries
                 CurrentLocation = @CurrentLocation,
                 PreferredLocation = @PreferredLocation,
                 Experience = @Experience,
+                IsProfileUpdated = @IsProfileUpdated,
                 Education = @Education,
                 ResumeLocation = @ResumeLocation,
                 ModifiedOn = @ModifiedOn

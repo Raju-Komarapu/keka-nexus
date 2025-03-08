@@ -31,7 +31,8 @@ public class RequestContextBuilder
                 Email = user.Username,
                 UserIdentifier = user.Identifier,
                 ProfileId = user.ProfileId,
-                DisplayName = this.ContextService.GetDisplayName(user.ProfileId)
+                DisplayName = this.ContextService.GetDisplayName(user.ProfileId).Item1 ?? string.Empty,
+                IsProfileUpdated = this.ContextService.GetDisplayName(user.ProfileId).Item2,
             };
         }
 

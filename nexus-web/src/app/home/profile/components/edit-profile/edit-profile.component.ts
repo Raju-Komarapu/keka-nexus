@@ -27,6 +27,7 @@ export class EditProfileComponent implements OnInit {
     countries = countries;
     isFormSubmitted: boolean = false;
     workModes = PreferredModeOfWorking.getAll();
+    isDisabled = true;
 
     validationMessages = {
         id: [
@@ -172,7 +173,7 @@ export class EditProfileComponent implements OnInit {
             firstName: new FormControl(candidateProfile.firstName, [Validators.required]),
             middleName: new FormControl(candidateProfile.middleName),
             lastName: new FormControl(candidateProfile.lastName, [Validators.required]),
-            email: new FormControl(candidateProfile.email, [Validators.required]),
+            email: new FormControl({ value: candidateProfile.email, disabled: true }, [Validators.required]),
             dateOfBirth: new FormControl(candidateProfile.dateOfBirth),
             phone : new FormControl(candidateProfile.phone),
             expectedSalary: new FormControl(candidateProfile.expectedSalary, [Validators.required]),
@@ -263,6 +264,7 @@ export class EditProfileComponent implements OnInit {
         this.isFormSubmitted = true;
         if(this.candidateForm.valid) {
             const candidateProfile = new CandidateProfile(this.candidateForm.value);
+            candidateProfile.email = this.candidateProfile.email;
             candidateProfile.phone = candidateProfile.phone.toString();
             this.candidateProfileService.updateCandidateDetails(this.contextService.getUser().profileId, candidateProfile).subscribe({
                 next: (data) => {

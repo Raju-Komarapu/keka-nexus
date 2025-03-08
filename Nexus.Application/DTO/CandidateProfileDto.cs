@@ -33,6 +33,8 @@ public class CandidateProfileDto
 
     public string? CurrentLocation { get; set; } // Optional
 
+    public bool IsProfileUpdated { get; set; }
+
     public PreferredLocation PreferredLocation { get; set; }
 
     public IEnumerable<ExperienceDetails> Experience { get; set; } = new List<ExperienceDetails>(); // Required (can be empty)

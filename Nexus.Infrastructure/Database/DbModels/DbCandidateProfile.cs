@@ -17,6 +17,7 @@ internal class DbCandidateProfile: DbBaseModel
     public string CurrentSalary { get; set; }
     public string Address { get; set; }
     public string CurrentLocation { get; set; }
+    public bool IsProfileUpdated { get; set; }
     public string PreferredLocation { get; set; }
     public string Experience { get; set; }
     public string Education { get; set; }

@@ -9,8 +9,9 @@ public class ContextService(IUserRepository userRepository, ICandidateProfileRep
         return userRepository.GetUserByIdentifier(userIdentifier);
     }
 
-    public string GetDisplayName(int profileId)
+    public (string, bool) GetDisplayName(int profileId)
     {
-        return candidateProfileRepository.GetCandidateProfile(profileId).DisplayName;
+        var candidateProfile = candidateProfileRepository.GetCandidateProfile(profileId);
+        return (candidateProfile.DisplayName, candidateProfile.IsProfileUpdated);
     }
 }
