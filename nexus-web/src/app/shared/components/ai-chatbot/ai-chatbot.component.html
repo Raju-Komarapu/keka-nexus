@@ -8,22 +8,24 @@
       <i class="ph ph-x fs-5"></i>
     </div>
   </div>
-  <div class="modal-body" style="height: 85%;">
+  <div class="modal-body" style="height: 70%;">
     <div class="d-flex flex-column h-100">
       <div style="display: flex;flex-direction: column;" class="h-75">
         <div style="flex-grow: 1; overflow-y: scroll;">
-          <div class="px-2 py-2 m-2 rounded bg-light" [ngClass]="isOdd ? 'me-auto' : 'ms-auto'" *ngFor="let questionAnswer of questionAnswers; odd as isOdd"
+          <div class="px-2 py-2 m-2 rounded" [ngClass]="isOdd ? 'me-auto bg-light' : 'ms-auto border rounded'" *ngFor="let questionAnswer of questionAnswers; odd as isOdd"
                 style="max-width: 70%; margin-bottom: 15px;">
             {{questionAnswer}}
           </div>
         </div>
       </div>
       <div class="h-25">
+        <img *ngIf="isRequestInProgress" class=" me-auto" width="80px" src="..\assets\ai-loader.gif">
         <h5 class="text-center py-1" *ngIf="!questionAnswers.length">What do you want to know?</h5>
         <div class="d-flex justify-content-between position-relative">
           <input type="text" 
                 class="px-2 py-3 rounded border-1"
                 style="width: 100%;"
+                [disabled]="isRequestInProgress"
                 [(ngModel)]="userMessage" 
                 placeholder="Ask anything about the company..."
                 (keyup.enter)="sendMessage()"
@@ -31,7 +33,7 @@
           <div (click)="sendMessage()" class="p-1 bg-light rounded-circle position-absolute top-50 translate-middle-y" style="cursor: pointer; right: 8px;"><i class="ph ph-arrow-right fs-5"></i></div>
         </div>
         <div class="py-2 d-flex flex-wrap">
-          <div class="px-2 py-1 m-1" style="border: solid 1px #5746AF; border-radius: 500px; color: #5746AF; cursor: pointer; background-color: #F5F2FF;" *ngFor="let question of suggestedQuestions" 
+          <div class="px-2 py-1 m-1" style="border: solid 1px #5746AF; border-radius: 500px; color: #5746AF; cursor: pointer; background-color: #F5F2FF;" *ngFor="let question of suggestedQuestions"
                   (click)="askQuestion(question)">
             {{ question }}
         </div>

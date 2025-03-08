@@ -1,7 +1,9 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
     selector: 'app-ai-chatbot',
@@ -10,6 +12,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
     imports: [CommonModule, FormsModule, NgFor, NgIf]
 })
 export class AIChatbotComponent {
+    private apiUrl = 'https://agent-prod.studio.lyzr.ai/v3/inference/chat/';
+    private apiKey = 'sk-default-fNcnzGyU885QaDjfRHPIOqFzP3YKkARo';
+
     userMessage = '';
     suggestedQuestions = [
       'How is the company culture?',
@@ -20,8 +25,12 @@ export class AIChatbotComponent {
 
     questionAnswers: Array<string> = [];
 
+    isRequestInProgress: boolean = false;
+
     constructor(
       private modalref: BsModalRef,
+      private httpClient: HttpClient,
+                private notificationService: NotificationService,
     ) {}
   
     closeChat() {
@@ -30,12 +39,47 @@ export class AIChatbotComponent {
   
     sendMessage() {
       if (this.userMessage.trim()) {
-        this.userMessage = '';
+        const headers = new HttpHeaders({
+          'x-api-key': this.apiKey,
+        });
+
+        let data = 
+        {
+          "user_id": "tharungade2001@gmail.com",
+          "system_prompt_variables": {},
+          "agent_id": "67cc146d4f4888a85278cf68",
+          "session_id": "67cc146d4f4888a85278cf68",
+          "message": this.userMessage
+        };
+
+        this.isRequestInProgress = true;
+        this.questionAnswers.push(this.userMessage);
+        this.httpClient.post(this.apiUrl, data, { headers }).subscribe({
+          next: (data) =>{
+            this.isRequestInProgress = false;
+            if(data)
+            {
+              this.questionAnswers.push(data['response'] ?? 'error in generating response');
+            }
+
+            this.userMessage = '';
+          },
+          error: (err) => 
+          {
+            this.questionAnswers.pop();
+            this.isRequestInProgress = false;
+            this.userMessage = '';
+            this.notificationService.error("Error", err?.message ?? "Error logging in")
+          }
+        })
       }
     }
   
     askQuestion(question: string) {
-      this.userMessage = question;
-      this.sendMessage();
+      if(!this.isRequestInProgress)
+      {
+        this.userMessage = question;
+        this.sendMessage();
+      }
     }
   }
