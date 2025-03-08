@@ -6,19 +6,21 @@
     </div>
     <div class="d-flex align-items-center fs-5">
       <div class="d-flex align-items-center text-white" *ngIf="isLoggedIn">
-        <p class="m-0 px-2">{{displayName}}</p>
         <div class="dropdown" dropdown container="body" placement="bottom left">
-          <button dropdownToggle id="menu" class="btn text-white" aria-haspopup="true" aria-expanded="false">
-            <i class="ph ph-caret-down"></i>
-          </button>
+            <div dropdownToggle id="menu" aria-haspopup="true" aria-expanded="false">
+                <div class="d-flex align-items-center">
+                    <p class="m-0 pointer px-2">{{displayName}}</p>
+                    <button class="btn text-white"><i class="ph ph-caret-down"></i></button>
+                </div>
+            </div>
           <ul class="dropdown-menu dropdown-menu p-0" aria-labelledby="menu" *dropdownMenu>
-            <a class="text-decoration-none text-dark" href="#/home/profile">
+            <a class="text-decoration-none text-dark" routerLink="/home/profile">
               <li class="px-2 py-1">Profile</li>
             </a>
-            <a class="text-decoration-none text-dark" href="#/home/my-applications">
+            <a class="text-decoration-none text-dark" routerLink="/home/my-applications">
               <li class="px-2 py-1">My Applications</li>
             </a>
-            <a class="text-decoration-none text-dark" href="#/logout">
+            <a class="text-decoration-none text-dark" routerLink="/logout">
               <li class="px-2 py-1">Log out</li>
             </a>
           </ul>

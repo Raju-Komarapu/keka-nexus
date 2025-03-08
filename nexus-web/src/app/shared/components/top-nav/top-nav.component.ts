@@ -10,7 +10,7 @@ import { ContextService } from '../../../context/context-service';
     selector: 'top-nav',
     templateUrl: './top-nav.component.html',
     standalone: true,
-    imports: [NgIf, RouterModule, BsDropdownModule ],
+    imports: [NgIf, RouterModule, BsDropdownModule],
     styles: [`
     .dropdown-menu {
         min-width: 200px;

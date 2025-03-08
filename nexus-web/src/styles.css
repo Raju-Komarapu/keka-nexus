@@ -51,6 +51,10 @@ body {
     gap: 12px;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .search-input {
     position: relative;
     /* width: 100%; */
