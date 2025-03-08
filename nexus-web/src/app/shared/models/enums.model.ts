@@ -5,7 +5,7 @@ export class Enum {
     }
 
     // getAll
-    static getAll(): Array<Object> {
+    static getAll(): Array<{ title: string, id: string | number }> {
         // which means here we filter only
         return Object.keys(this).filter(key => typeof this[key] === 'string').map(key => {
             const id = parseInt(key, 10);

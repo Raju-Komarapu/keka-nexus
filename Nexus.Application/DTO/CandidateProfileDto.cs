@@ -14,9 +14,9 @@ public class CandidateProfileDto
     public string ExpectedSalary { get; set; }
     public string CurrentSalary { get; set; }
     public Address Address { get; set; }
-    public string CurrentLocation { get; set; }
+    public string? CurrentLocation { get; set; }
     public PreferredLocation PreferredLocation { get; set; }
     public IEnumerable<ExperienceDetails> Experience { get; set; }
     public IEnumerable<EducationDetails> Education { get; set; }
-    public string ResumeLocation { get; set; }
+    public string? ResumeLocation { get; set; }
 }

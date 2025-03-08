@@ -1,0 +1,343 @@
+<div class="mx-5" *ngIf="candidateForm">
+    <div class="bg-white mt-3 p-4 d-flex align-items-center justify-content-between">
+        <div class="fs-4">Edit Profile</div>
+        <div>
+            <button (click)="save()" class="btn btn-outline-primary">Save</button>
+            <button (click)="cancel()" class="ms-2 btn btn-outline-primary">Cancel</button>
+        </div>
+    </div>
+    <div [formGroup]="candidateForm">
+        <div class="bg-white mt-3 px-4 p-3">
+            <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+                <i class="ph ph-user"></i>
+                <span>Job Preferences</span>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="expectedSalary" class="form-label">Expected Salary</label>
+                    <input type="text" class="form-control" id="expectedSalary" name="expectedSalary" formControlName="expectedSalary">
+                    <validation-messages [validationMessages]="validationMessages.expectedSalary"
+                        [formController]="candidateForm.get('expectedSalary')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="currentSalary" class="form-label">Current Salary</label>
+                    <input type="text" class="form-control" id="currentSalary" name="currentSalary" formControlName="currentSalary">
+                    <validation-messages [validationMessages]="validationMessages.currentSalary"
+                        [formController]="candidateForm.get('currentSalary')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <ng-container formGroupName="preferredLocation">
+                    <div class="d-flex align-items-center mb-3 col-md-6 col-lg-4">
+                        <div class=" form-check">
+                            <input type="checkbox" class="form-check-input" id="willingToRelocate" name="willingToRelocate" formControlName="willingToRelocate">
+                            <label class="form-check-label" for="willingToRelocate">Willing to Relocate</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-md-6 col-lg-4">
+                        <label for="locationName" class="form-label">Preferred Location</label>
+                        <input type="text" class="form-control" id="locationName" name="locationName" formControlName="locationName">
+                        <validation-messages [validationMessages]="validationMessages.preferredLocation.locationName"
+                            [formController]="candidateForm.get('preferredLocation.locationName')" [isFormSubmitted]="isFormSubmitted">
+                        </validation-messages>
+                    </div>
+
+                    <div class="mb-3 col-md-6 col-lg-4">
+                        <label for="preferredModeOfWorking" class="form-label">Preferred Mode of Working</label>
+                        <ng-select 
+                            [items]="workModes"
+                            bindLabel="title"
+                            bindValue="id"
+                            placeholder="Select Preferred working mode"
+                            formControlName="preferredModeOfWorking">
+                        </ng-select>
+                        <validation-messages [validationMessages]="validationMessages.preferredLocation.preferredModeOfWorking"
+                            [formController]="candidateForm.get('preferredLocation.preferredModeOfWorking')" [isFormSubmitted]="isFormSubmitted">
+                        </validation-messages>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="bg-white mt-3 px-4 p-3">
+            <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+                <i class="ph ph-user"></i>
+                <span>Personal Details</span>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName">
+                    <validation-messages [validationMessages]="validationMessages.firstName"
+                        [formController]="candidateForm.get('firstName')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="middleName" class="form-label">Middle Name</label>
+                    <input type="text" class="form-control" id="middleName" name="middleName" formControlName="middleName">
+                    <validation-messages [validationMessages]="validationMessages.middleName"
+                        [formController]="candidateForm.get('middleName')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName">
+                    <validation-messages [validationMessages]="validationMessages.lastName"
+                        [formController]="candidateForm.get('lastName')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="dateOfBirth" class="form-label">Date Of birth</label>
+                    <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth"
+                           bsDatepicker placement="left" placement = "top"
+                           [bsConfig]="{ customTodayClass: 'today-date-highlight', showWeekNumbers: false, dateInputFormat: 'DD MMM YYYY', maxDate: todayDate }" >
+                    <validation-messages [validationMessages]="validationMessages.dateOfBirth"
+                        [formController]="candidateForm.get('dateOfBirth')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white mt-3 px-4 p-3">
+            <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+                <i class="ph ph-at"></i>
+                <span>Contact Details</span>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" formControlName="email">
+                    <validation-messages [validationMessages]="validationMessages.email"
+                        [formController]="candidateForm.get('email')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="phone" class="form-label">Mobile</label>
+                    <input type="number" class="form-control" id="phone" name="phone" formControlName="phone">
+                    <validation-messages [validationMessages]="validationMessages.phone"
+                        [formController]="candidateForm.get('phone')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+            </div>
+            <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+                <i class="ph ph-map-pin"></i>
+                <span>Address</span>
+            </div>
+            <div class="row" formGroupName="address">
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="countryCode" class="form-label">Country</label>
+                    <ng-select 
+                        [items]="countries"
+                        bindLabel="name"
+                        bindValue="id"
+                        placeholder="Select Country"
+                        formControlName="countryCode">
+                    </ng-select>
+                    <validation-messages [validationMessages]="validationMessages.address.countryCode"
+                        [formController]="candidateForm.get('address.countryCode')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="state" class="form-label">State</label>
+                    <input type="text" class="form-control" id="state" name="state" formControlName="state">
+                    <validation-messages [validationMessages]="validationMessages.address.state"
+                        [formController]="candidateForm.get('address.state')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control" id="city" name="city" formControlName="city">
+                    <validation-messages [validationMessages]="validationMessages.address.city"
+                        [formController]="candidateForm.get('address.city')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="addressLine1" class="form-label">Address Line 1</label>
+                    <input type="text" class="form-control" id="addressLine1" name="addressLine1" formControlName="addressLine1">
+                    <validation-messages [validationMessages]="validationMessages.address.addressLine1"
+                        [formController]="candidateForm.get('address.addressLine1')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="addressLine2" class="form-label">Address Line 2</label>
+                    <input type="text" class="form-control" id="addressLine2" name="addressLine2" formControlName="addressLine2">
+                    <validation-messages [validationMessages]="validationMessages.address.addressLine2"
+                        [formController]="candidateForm.get('address.addressLine2')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+
+                <div class="mb-3 col-md-6 col-lg-4">
+                    <label for="zip" class="form-label">Postal Code</label>
+                    <input type="text" class="form-control" id="zip" name="zip" formControlName="zip">
+                    <validation-messages [validationMessages]="validationMessages.address.zip"
+                        [formController]="candidateForm.get('address.zip')" [isFormSubmitted]="isFormSubmitted">
+                    </validation-messages>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white mt-3 px-4 p-3" formGroupName="experience">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+                    <i class="ph ph-suitcase-simple"></i>
+                    <span>Experience</span>
+                </div>
+                <div>
+                    <button (click)="addExperience()" class="btn btn-outline-primary">Add Experience</button>
+                </div>
+            </div>
+            <ng-container *ngFor="let experience of experienceFormControls; let experienceFormIndex = index;" [formGroupName]="experienceFormIndex">
+                <div class="d-flex"  [ngClass]="{ 'border-bottom': experienceFormIndex !== experienceFormControls.length - 1, 'mt-2': experienceFormIndex !== 0 }">
+                    <div class="row">
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="companyName_{{experienceFormIndex}}" class="form-label">Company Name</label>
+                            <input type="text" class="form-control" id="companyName_{{experienceFormIndex}}" formControlName="companyName">
+                            <validation-messages [validationMessages]="validationMessages.experience.companyName"
+                                [formController]="getExperienceFormAt(experienceFormIndex).get('companyName')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="designation_{{experienceFormIndex}}" class="form-label">Designation</label>
+                            <input type="text" class="form-control" id="designation_{{experienceFormIndex}}" formControlName="designation">
+                            <validation-messages [validationMessages]="validationMessages.experience.designation"
+                                [formController]="getExperienceFormAt(experienceFormIndex).get('designation')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-3 col-md-6 col-lg-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="isCurrentlyWorking_{{experienceFormIndex}}" formControlName="isCurrentlyWorking">
+                                <label class="form-check-label" for="isCurrentlyWorking_{{experienceFormIndex}}">Is Currently Working</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="dateOfJoining_{{experienceFormIndex}}" class="form-label">Date Of Joining</label>
+                            <input type="text" class="form-control" id="dateOfJoining_{{experienceFormIndex}}" formControlName="dateOfJoining"
+                                bsDatepicker placement="left" placement = "top"
+                                [bsConfig]="{ showWeekNumbers: false, dateInputFormat: 'DD MMM YYYY', maxDate: todayDate }" >
+                            <validation-messages [validationMessages]="validationMessages.experience.dateOfJoining"
+                                [formController]="getExperienceFormAt(experienceFormIndex).get('dateOfJoining')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="dateOfRelieving" class="form-label">Date Of Relieving</label>
+                            <input type="text" class="form-control" id="dateOfRelieving" name="dateOfRelieving" formControlName="dateOfRelieving"
+                                bsDatepicker placement="left" placement = "top"
+                                [bsConfig]="{ showWeekNumbers: false, dateInputFormat: 'DD MMM YYYY', maxDate: todayDate }" >
+                            <validation-messages [validationMessages]="validationMessages.experience.dateOfRelieving"
+                                [formController]="getExperienceFormAt(experienceFormIndex).get('dateOfRelieving')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="location_{{experienceFormIndex}}" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location_{{experienceFormIndex}}" formControlName="location">
+                            <validation-messages [validationMessages]="validationMessages.experience.location"
+                                [formController]="getExperienceFormAt(experienceFormIndex).get('location')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                    </div>
+                    <div class="ms-2 mt-4">
+                        <button (click)="removeAt(experienceFormIndex, 'experience')" class="btn btn-outline-primary"><i class="ph ph-trash"></i></button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="bg-white mt-3 px-4 p-3" formGroupName="education">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="align-items-center d-flex fs-5 fw-semibold gap-2 mb-2">
+                    <i class="ph ph-graduation-cap"></i>
+                    <span>Education</span>
+                </div>
+                <div>
+                    <button (click)="addEducation()" class="btn btn-outline-primary">Add Education</button>
+                </div>
+            </div>
+            <ng-container *ngFor="let education of educationFormControls; let educationFormIndex = index;" [formGroupName]="educationFormIndex">
+                <div class="d-flex" [ngClass]="{ 'border-bottom': educationFormIndex !== experienceFormControls.length - 1, 'mt-2': educationFormIndex !== 0 }">
+                    <div class="row">
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="institutionName_{{educationFormIndex}}" class="form-label">Institution Name</label>
+                            <input type="text" class="form-control" id="institutionName_{{educationFormIndex}}" formControlName="institutionName">
+                            <validation-messages [validationMessages]="validationMessages.education.institutionName"
+                                [formController]="getEducationFormAt(educationFormIndex).get('institutionName')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="location_{{educationFormIndex}}" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location_{{educationFormIndex}}" formControlName="location">
+                            <validation-messages [validationMessages]="validationMessages.education.location"
+                                [formController]="getEducationFormAt(educationFormIndex).get('location')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="degree_{{educationFormIndex}}" class="form-label">Degree</label>
+                            <input type="text" class="form-control" id="degree_{{educationFormIndex}}" formControlName="degree">
+                            <validation-messages [validationMessages]="validationMessages.education.degree"
+                                [formController]="getEducationFormAt(educationFormIndex).get('degree')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="specialization_{{educationFormIndex}}" class="form-label">Specialization</label>
+                            <input type="text" class="form-control" id="specialization_{{educationFormIndex}}" formControlName="specialization">
+                            <validation-messages [validationMessages]="validationMessages.education.specialization"
+                                [formController]="getEducationFormAt(educationFormIndex).get('specialization')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="score_{{educationFormIndex}}" class="form-label">Score</label>
+                            <input type="text" class="form-control" id="score_{{educationFormIndex}}" formControlName="score">
+                            <validation-messages [validationMessages]="validationMessages.education.score"
+                                [formController]="getEducationFormAt(educationFormIndex).get('score')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="startDate_{{educationFormIndex}}" class="form-label">Start Date</label>
+                            <input type="text" class="form-control" id="startDate_{{educationFormIndex}}" formControlName="startDate"
+                                bsDatepicker placement="left" placement = "top"
+                                [bsConfig]="{ showWeekNumbers: false, dateInputFormat: 'DD MMM YYYY', maxDate: todayDate }" >
+                            <validation-messages [validationMessages]="validationMessages.education.startDate"
+                                [formController]="getEducationFormAt(educationFormIndex).get('startDate')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+
+                        <div class="mb-3 col-md-6 col-lg-4">
+                            <label for="endDate_{{educationFormIndex}}" class="form-label">End Date</label>
+                            <input type="text" class="form-control" id="endDate_{{educationFormIndex}}" formControlName="endDate"
+                                bsDatepicker placement="left" placement = "top"
+                                [bsConfig]="{ showWeekNumbers: false, dateInputFormat: 'DD MMM YYYY', maxDate: todayDate }" >
+                            <validation-messages [validationMessages]="validationMessages.education.endDate"
+                                [formController]="getEducationFormAt(educationFormIndex).get('endDate')" [isFormSubmitted]="isFormSubmitted">
+                            </validation-messages>
+                        </div>
+                    </div>
+                    <div class="ms-2 mt-4">
+                        <button (click)="removeAt(educationFormIndex, 'education')" class="btn btn-outline-primary"><i class="ph ph-trash"></i></button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+

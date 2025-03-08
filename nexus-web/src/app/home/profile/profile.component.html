@@ -1,4 +1,4 @@
-<div class="mx-5" *ngIf="candidateProfile">
+<div class="mx-5" *ngIf="candidateProfile && !editMode">
     <div class="bg-white mt-3 p-4">
         <div class="d-flex justify-content-between">
             <div class="d-flex gap-2">
@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div>
-                <button class="btn btn-outline-primary">Edit profile</button>
+                <button (click)="editMode = true" class="btn btn-outline-primary">Edit profile</button>
             </div>
         </div>
     </div>
@@ -163,3 +163,7 @@
         </ng-container>
     </div>
 </div>
+
+<ng-container *ngIf="editMode && candidateProfile">
+    <edit-profile (onClose)="onEditProfileClose($event)" [candidateProfile]="candidateProfile"></edit-profile>
+</ng-container>

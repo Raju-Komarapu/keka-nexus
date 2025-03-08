@@ -15,4 +15,8 @@ export class CandidateProfileService {
     getCandidateDetails(): Observable<CandidateProfile> {
         return this.httpClient.get<CandidateProfile>(`${this.apiUrl}/me`);
     }
+
+    updateCandidateDetails(profileId: number,candidateProfile: CandidateProfile): Observable<boolean> {
+        return this.httpClient.put<boolean>(`${this.apiUrl}/${profileId}`, candidateProfile);
+    }
 }

@@ -3,16 +3,18 @@ import { Component, OnInit } from '@angular/core';
 
 import { CandidateProfileService } from './services/candidate-profile-service';
 import { CandidateProfile, PreferredModeOfWorking } from './models/candidate-profile';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   standalone: true,
-  imports: [DatePipe, NgIf, NgFor]
+  imports: [DatePipe, NgIf, NgFor, EditProfileComponent]
 })
 export class ProfileComponent implements OnInit {
     candidateProfile: CandidateProfile;
     preferredModeOfWorking = PreferredModeOfWorking;
+    editMode: boolean = false;
 
     get candidateAddress () {
         return this.candidateProfile.address ? `${this.candidateProfile.address.countryName}, ${this.candidateProfile.address.state}, ${this.candidateProfile.address.city}, ${this.candidateProfile.address.addressLine1}, ${this.candidateProfile.address.addressLine2}, ${this.candidateProfile.address.zip}` : '--';
@@ -35,10 +37,17 @@ export class ProfileComponent implements OnInit {
             }
         })
     }
+
+    onEditProfileClose(isUpdated: boolean) {
+        this.editMode = false;
+        if (isUpdated) {
+            this.getCandidateProfileDetails();
+        }
+    }
 }
 
 
-const candiadateProfile: CandidateProfile = {
+const candidateProfile: CandidateProfile = {
     "id": 1,
     "firstName": "John",
     "middleName": "A.",
@@ -64,8 +73,8 @@ const candiadateProfile: CandidateProfile = {
         "companyName": "ABC Corp",
         "designation": "Software Engineer",
         "isCurrentlyWorking": true,
-        "dateOfJoining": "2015-06-01T00:00:00Z",
-        "dateOfRelieving": "2023-03-01T00:00:00Z",
+        "dateOfJoining": new Date("2015-06-01T00:00:00Z"),
+        "dateOfRelieving": new Date("2023-03-01T00:00:00Z"),
         "location": "New York, NY"
       }
     ],
@@ -73,8 +82,8 @@ const candiadateProfile: CandidateProfile = {
       {
         "degree": "Bachelor of Science",
         "specialization": "Computer Science",
-        "startDate": "2010-09-01T00:00:00Z",
-        "endDate": "2014-06-01T00:00:00Z",
+        "startDate": new Date("2010-09-01T00:00:00Z"),
+        "endDate": new Date("2014-06-01T00:00:00Z"),
         "score": "3.7",
         "institutionName": "State University",
         "location": "New York, NY"
