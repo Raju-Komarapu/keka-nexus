@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AIChatbotComponent } from '../../shared/components/ai-chatbot/ai-chatbot.component';
+import { JobAppliedConfirmation } from '../../shared/components/job-applied-confirmation/job-applied-confirmation.component';
 import { ApplicationStatus, JobType } from '../../shared/models/enums.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedDataService } from '../../shared/services/shared-data.service';
@@ -145,6 +146,7 @@ export class JobComponent implements OnInit {
 					}
 					this.notificationService.success("Success", "Successfully applied for job");
 					this.getJob();
+					this.openJobAppliedConfirmation();
 				},
 				error: (err) => {
 					this.notificationService.error("Error", err?.message ?? "Error in applying for job")
@@ -154,6 +156,31 @@ export class JobComponent implements OnInit {
 		else {
 			this.router.navigate(['./login']);
 		}
+	}
+
+	openJobAppliedConfirmation() {
+		const config = {
+			backdrop: true,
+			ignoreBackdropClick: true,
+		};
+
+		const modalRef = this.ModalService.show(JobAppliedConfirmation, config);
+		modalRef.content.sendConfirmation.subscribe((data: boolean) => {
+			if(data) {
+				this.jobApplication.applicationStatus = ApplicationStatus.Screening;
+				this.jobApplicationService.updateJobApplicationStatus(this.jobApplication).subscribe(
+					{
+						next: (data) => {
+							this.notificationService.success("Success", "Successfully moved to screening");
+							this.getJob();
+						},
+						error:  (err) => {
+							this.notificationService.error("Error", err?.message ?? "Error in completing the screening")
+						}
+					}
+				);
+			}
+		});
 	}
 
 	goBack() {

@@ -17,4 +17,8 @@ export class JobApplicationService {
     addJobApplications(jobApplication: any): Observable<any> {
         return this.httpClient.post<any>(`${this.apiUrl}`, jobApplication);
     }
+
+    updateJobApplicationStatus(jobApplication: any): Observable<any> {
+        return this.httpClient.put<any>(`${this.apiUrl}`, jobApplication);
+    }
 }

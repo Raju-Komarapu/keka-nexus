@@ -30,7 +30,7 @@ export class AIChatbotComponent {
     constructor(
       private modalref: BsModalRef,
       private httpClient: HttpClient,
-                private notificationService: NotificationService,
+      private notificationService: NotificationService,
     ) {}
   
     closeChat() {
