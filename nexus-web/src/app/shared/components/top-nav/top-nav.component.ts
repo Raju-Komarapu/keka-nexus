@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AuthService } from '../../../auth/services/auth.service';
 import { ContextService } from '../../../context/context-service';
@@ -9,7 +10,7 @@ import { ContextService } from '../../../context/context-service';
     selector: 'top-nav',
     templateUrl: './top-nav.component.html',
     standalone: true,
-    imports: [NgIf, RouterModule]
+    imports: [NgIf, RouterModule, BsDropdownModule ]
 })
 export class TopNavComponent implements OnInit {
     constructor(private contextService: ContextService,

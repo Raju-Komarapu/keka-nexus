@@ -6,6 +6,7 @@
 body {
     background-color: #F2F3F5;
     font-size: 14px;
+    overflow-x: hidden;
 }
 
 .font-w {
