@@ -9,6 +9,7 @@ import { authGuard } from './auth/route-guards/auth-guard';
 import { AllJobsComponent } from './shared/components/all-jobs/all-jobs.component';
 import { JobComponent } from './home/job/job.component';
 import { LogoutComponent } from './auth/components/logout/logout.component';
+import { MyApplicationsComponent } from './home/my-applications/my-applications.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -25,6 +26,9 @@ const routes: Routes = [
             },
             {
                 path: 'job', component: JobComponent
+            },
+            {
+                path: 'my-applications', component: MyApplicationsComponent
             }
         ]
     },

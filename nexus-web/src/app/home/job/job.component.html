@@ -32,13 +32,16 @@
             </div>
 
             <div class="container-2">
-                <div class="job-description">
-                    <div class="job-description-content">
-                        <h3>Job description</h3>
-                        <p class="summary" [innerHtml]="job.description">
-                        </p>
+                <div class="job-description h-100">
+                    <div id="jobdecription" style="width: 550px; height: 300px;" class="overflow-hidden">
+                        <div class="job-description-content">
+                            <h3>Job description</h3>
+                            <p class="summary" [innerHtml]="job.description">
+                            </p>
+                        </div>
                     </div>
-                    <button class="read-more">Read more</button>
+                    <button *ngIf="!isReadMore" class="read-more cursor-pointer" style="cursor: pointer;" (click)="openReadMoreDescription()">Read more</button>
+                    <button *ngIf="isReadMore" class="read-more cursor-pointer" style="cursor: pointer;" (click)="openReadLessDescription()">Read less</button>
                     <div class="working-hours">
                         <div class="question">
                             <img src="..\assets\wand.svg">
