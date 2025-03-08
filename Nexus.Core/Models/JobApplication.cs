@@ -10,5 +10,6 @@ public class JobApplication
     public string TenantId { get; set; }
     public int ProfileId { get; set; }
     public ApplicationStatus ApplicationStatus { get; set; }
+    public List<ApplicationStatusLog> ApplicationStatusLog { get; set; }
     public DateTime AppliedOn { get; set; }
 }

@@ -2,8 +2,7 @@ import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { CandidateProfileService } from './services/candidate-profile-service';
-import { ContextService } from '../../context/context-service';
-import { CandidateProfile } from './models/candidate-profile';
+import { CandidateProfile, PreferredModeOfWorking } from './models/candidate-profile';
 
 @Component({
   selector: 'app-profile',
@@ -13,17 +12,17 @@ import { CandidateProfile } from './models/candidate-profile';
 })
 export class ProfileComponent implements OnInit {
     candidateProfile: CandidateProfile;
+    preferredModeOfWorking = PreferredModeOfWorking;
 
     get candidateAddress () {
-        return `${this.candidateProfile.address.countryName}, ${this.candidateProfile.address.state}, ${this.candidateProfile.address.city}, ${this.candidateProfile.address.addressLine1}, ${this.candidateProfile.address.addressLine2}, ${this.candidateProfile.address.zip}`;
+        return this.candidateProfile.address ? `${this.candidateProfile.address.countryName}, ${this.candidateProfile.address.state}, ${this.candidateProfile.address.city}, ${this.candidateProfile.address.addressLine1}, ${this.candidateProfile.address.addressLine2}, ${this.candidateProfile.address.zip}` : '--';
     }
 
     get fullName () {
         return `${this.candidateProfile.firstName} ${this.candidateProfile.middleName ?? ''} ${this.candidateProfile.lastName}`
     }
 
-    constructor(private contextService: ContextService,
-                private candidateProfileService: CandidateProfileService) {}
+    constructor(private candidateProfileService: CandidateProfileService) {}
 
     ngOnInit(): void {
         this.getCandidateProfileDetails();
@@ -59,7 +58,7 @@ const candiadateProfile: CandidateProfile = {
       "countryName": "United States"
     },
     "currentLocation": "New York, NY",
-    "preferredLocation": "San Francisco, CA",
+    "preferredLocation": null,
     "experience": [
       {
         "companyName": "ABC Corp",

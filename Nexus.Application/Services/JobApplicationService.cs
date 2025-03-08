@@ -18,6 +18,7 @@ public class JobApplicationService(IRequestContext requestContext, IMapper mappe
         }
 
         var jobApplication = mapper.Map<JobApplication>(jobApplicationDto);
+        jobApplication.ApplicationStatusLog = new List<ApplicationStatusLog> { new ApplicationStatusLog() { Status = ApplicationStatus.New, IsCompleted = true, CompletedOn = DateTime.UtcNow} };
         jobApplication.ProfileId = this.RequestContext.ProfileId;
         jobApplication.ApplicationStatus = ApplicationStatus.New;
         return jobApplicationRepository.AddJobApplication(jobApplication) != 0;
@@ -32,6 +33,10 @@ public class JobApplicationService(IRequestContext requestContext, IMapper mappe
     public bool UpdateJobApplicationStatus(JobApplicationDto jobApplicationDto)
     {
         var jobApplication = mapper.Map<JobApplication>(jobApplicationDto);
+        if (jobApplication != null)
+        {
+            jobApplication.ApplicationStatusLog.Add(new ApplicationStatusLog() { Status = jobApplicationDto.ApplicationStatus, IsCompleted = true, CompletedOn = DateTime.UtcNow });
+        }
         jobApplication.ProfileId = this.RequestContext.ProfileId;
         return jobApplicationRepository.UpdateJobApplicationStatus(jobApplication);
     }

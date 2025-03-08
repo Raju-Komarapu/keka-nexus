@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Nexus.Application.DTO;
 using Nexus.Core.Models;
+using System.Text.Json.Serialization;
 
 namespace Nexus.Application;
 public class DtoMapperProfile: Profile

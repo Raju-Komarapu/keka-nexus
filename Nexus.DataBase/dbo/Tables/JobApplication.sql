@@ -5,6 +5,7 @@ CREATE TABLE JobApplication (
 	TenantId			VARCHAR(64)			NULL,
     ProfileId			INT					NULL,
 	ApplicationStatus	SMALLINT			NOT NULL,
+	ApplicationStatusLog NVARCHAR(MAX)		NULL,
 	AppliedOn			DATETIME			NOT NULL DEFAULT(GETUTCDATE()),
 	CreatedOn			DATETIME			NOT NULL DEFAULT(GETUTCDATE()),
 	ModifiedOn			DATETIME			NOT NULL DEFAULT(GETUTCDATE())

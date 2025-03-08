@@ -25,7 +25,9 @@ public class DataMapperProfile: Profile
 
         this.CreateMap<JobApplication, DbJobApplication>()
             .ForMember(d => d.ApplicationStatus, opt => opt.MapFrom(src => (short)src.ApplicationStatus))
+            .ForMember(d => d.ApplicationStatusLog, opt => opt.MapFrom(src => src.ApplicationStatusLog.ToJson()))
             .ReverseMap()
-            .ForMember(d => d.ApplicationStatus, opt => opt.MapFrom(src => (ApplicationStatus)src.ApplicationStatus));
+            .ForMember(d => d.ApplicationStatus, opt => opt.MapFrom(src => (ApplicationStatus)src.ApplicationStatus))
+            .ForMember(d => d.ApplicationStatusLog, opt => opt.MapFrom(src => src.ApplicationStatusLog.FromJson<ApplicationStatusLog>()));
     }
 }
