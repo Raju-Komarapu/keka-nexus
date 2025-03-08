@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AIChatbotComponent } from '../../shared/components/ai-chatbot/ai-chatbot.component';
@@ -25,7 +25,7 @@ interface Mentor {
 	templateUrl: './job.component.html',
 	styleUrls: ['./job.component.css']
 })
-export class JobComponent {
+export class JobComponent implements OnInit{
 	job: any;
 
 	applicationDate = 'Jan 23, 2023';
@@ -66,8 +66,12 @@ export class JobComponent {
 	jobId: string;
 	jobs: any;
 	jobApplication: any;
+	currentQuestionInd = 0;
 
-
+	ngOnInit(): void {
+		setInterval(() => { this.currentQuestionInd = (this.currentQuestionInd + 1) % 4}, 2000);	
+	}
+	
 	constructor(private ModalService: BsModalService,
 		private route: ActivatedRoute,
 		private contextService: ContextService,

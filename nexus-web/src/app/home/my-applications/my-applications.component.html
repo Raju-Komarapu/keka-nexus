@@ -1,53 +1,58 @@
 <div class="applications-container d-flex gap-5 justify-content-center">
     <div class="d-flex gap-5 w-75 justify-content-between p-5">
-    <div class="w-75 bg-white p-3 rounded border" style="height: 800px;">
-        <h3 *ngIf="applications?.length" class="m-0 mb-4">My applications</h3>
-<!-- 
-        <div class="tabs">
-            <button class="tab" [class.active]="activeTab === 'active'" (click)="activeTab = 'active'">
-                Active
-            </button>
-            <button class="tab" [class.active]="activeTab === 'archived'" (click)="activeTab = 'archived'">
-                Archived
-            </button>
-        </div> -->
+        <div class="w-75 bg-white p-3 rounded border" style="height: 800px;">
+            <h3 *ngIf="applications?.length" class="m-0 mb-4">My applications</h3>
+            <!-- 
+            <div class="tabs">
+                <button class="tab" [class.active]="activeTab === 'active'" (click)="activeTab = 'active'">
+                    Active
+                </button>
+                <button class="tab" [class.active]="activeTab === 'archived'" (click)="activeTab = 'archived'">
+                    Archived
+                </button>
+            </div> -->
 
-        <div *ngIf="applications?.length" class="applications-list border rounded">
-            <div (click)="goTojob(application.jobId)" class="border-bottom p-3" *ngFor="let application of applications" style="cursor: pointer;">
-                <div style="display: flex; justify-content: space-between; align-items: start;">
-                    <div>
-                        <h5>{{ application.job?.title }}</h5>
-                        <p>{{ application.job?.companyName }} • {{ getJobLocations(application.job) }} • {{ application.job?.experience }} • {{ getJobType(application.job?.jobType) }}</p>
+            <div *ngIf="applications?.length" class="applications-list border rounded">
+                <div (click)="goTojob(application.jobId)" class="border-bottom p-3"
+                    *ngFor="let application of applications" style="cursor: pointer;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h5>{{ application.job?.title }}</h5>
+                            <p>{{ application.job?.companyName }} • {{ getJobLocations(application.job) }} • {{
+                                application.job?.experience }} • {{ getJobType(application.job?.jobType) }}</p>
+                        </div>
+                        <span class="status-button">{{ getApplicationStatus(application.applicationStatus) }}</span>
                     </div>
-                    <span class="badge">{{ application.status }}</span>
+                </div>
+            </div>
+            <div *ngIf="!applications?.length && isLoaded">
+                <div class="card m-5 d-flex justify-content-center align-items-center" style="height: 200px;">
+                    <h4 class="mb-3">No Applications yet</h4>
+                    <div class="border rounded d-flex align-items-center justify-content-center"
+                        style="background: #5746af; color: white; height: 50px; width: 150px; cursor: pointer;"
+                        (click)="goToHome()">Explore More jobs</div>
                 </div>
             </div>
         </div>
-        <div *ngIf="!applications?.length">
-            <div class="card m-5 d-flex justify-content-center align-items-center" style="height: 200px;">
-                <h4 class="mb-3">No Applications yet</h4>
-                <div class="border rounded d-flex align-items-center justify-content-center" style="background: #5746af; color: white; height: 50px; width: 150px; cursor: pointer;" (click)="goToHome()">Explore More jobs</div>
-            </div>
-        </div>
-    </div>
-    <div class="w-50">
-        <div class="bg-white border rounded p-3">
-        <h5 class="mb-3">Upcoming interviews</h5>
-        <div *ngIf="applications?.length" class="interviews-list gap-3 d-flex flex-column">
-            <div class="interview-card border p-3 rounded" *ngFor="let interview of interviews">
-                <div>
-                    <div class="">{{ interview.position }}</div>
-                    <p>{{ interview.company }}</p>
-                    <p>{{ interview.date }} • {{ interview.time }} • {{ interview.platform }}</p>
+        <div class="w-50">
+            <div class="bg-white border rounded p-3">
+                <h5 class="mb-3">Upcoming interviews</h5>
+                <div *ngIf="applications?.length" class="interviews-list gap-3 d-flex flex-column">
+                    <div class="interview-card border p-3 rounded" *ngFor="let interview of interviews">
+                        <div>
+                            <div class="">{{ interview.position }}</div>
+                            <p>{{ interview.company }}</p>
+                            <p>{{ interview.date }} • {{ interview.time }} • {{ interview.platform }}</p>
+                        </div>
+                        <button class="join-button border rounded w-25 h-100">Join</button>
+                    </div>
                 </div>
-                <button class="join-button border rounded w-25 h-100">Join</button>
+                <div *ngIf="!applications?.length || !interviews?.length"
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; color: #666; height: 200px;">
+                    <img width="80px" src="..\assets\empty-box.svg">
+                    <p>No interviews scheduled yet</p>
+                </div>
             </div>
         </div>
-        <div *ngIf="!applications?.length || !interviews?.length" style="display: flex; flex-direction: column; align-items: center; justify-content: center; color: #666; height: 200px;">
-            <img width="80px" src="..\assets\empty-box.svg">
-            <p>No interviews scheduled yet</p>
-        </div>
     </div>
-    </div>
-</div>
 </div>
