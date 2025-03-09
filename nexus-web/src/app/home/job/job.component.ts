@@ -194,7 +194,6 @@ export class JobComponent implements OnInit {
 						}
 					);
 				} else {
-					this.jobApplication.applicationStatus = 1;
 					let jobApplication = {
 						"jobId": this.jobId,
 						"tenantId": this.job.tenantId,
@@ -211,6 +210,7 @@ export class JobComponent implements OnInit {
 						}]
 					};
 					this.jobApplication = jobApplication;
+					this.jobApplication.applicationStatus = 1;
 					this.jobApplicationLogs = [ {
 						"status": 0,
 						"isCompleted": true,
@@ -225,6 +225,10 @@ export class JobComponent implements OnInit {
 				}
 			}
 		});
+	}
+
+	openTopmate() {
+		window.open('https://topmate.io/', '_blank');
 	}
 
 	goBack() {
