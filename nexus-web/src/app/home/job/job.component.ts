@@ -35,6 +35,9 @@ export class JobComponent implements OnInit {
 	applicationStatus = ApplicationStatus.getAll();
 	jobApplicationLogs: any = [];
 
+    private screeningUrl="https://tharungade.in";
+    screeningQuestionsWindow: Window;
+
 	mentors: Mentor[] = [
 		{
 			name: 'Vinod Kumar',
@@ -172,18 +175,7 @@ export class JobComponent implements OnInit {
 		const modalRef = this.ModalService.show(JobAppliedConfirmation, config);
 		modalRef.content.sendConfirmation.subscribe((data: boolean) => {
 			if(data) {
-				this.jobApplication.applicationStatus = ApplicationStatus.Screening;
-				this.jobApplicationService.updateJobApplicationStatus(this.jobApplication).subscribe(
-					{
-						next: (data) => {
-							this.notificationService.success("Success", "Successfully moved to screening");
-							this.getJob();
-						},
-						error:  (err) => {
-							this.notificationService.error("Error", err?.message ?? "Error in completing the screening")
-						}
-					}
-				);
+				this.onAiScreeningComplete();
 			}
 		});
 	}
@@ -219,4 +211,34 @@ export class JobComponent implements OnInit {
 		};
 		this.ModalService.show(AIChatbotComponent, config);
 	}
+
+    openScreeningWindow() {
+        const windowFeature = 'width=1200,height=800,left=200,top=200';
+        this.screeningQuestionsWindow = window.open(this.screeningUrl, '', windowFeature);
+        this.checkWindowStatus();
+      }
+  
+    checkWindowStatus() {
+        console.log(this.screeningQuestionsWindow);
+        if (!this.screeningQuestionsWindow.closed) {
+            setTimeout(() => { this.checkWindowStatus(); }, 100);
+        } else {
+            this.onAiScreeningComplete();
+        }
+    }
+
+    onAiScreeningComplete() {
+        this.jobApplication.applicationStatus = ApplicationStatus.Screening;
+        this.jobApplicationService.updateJobApplicationStatus(this.jobApplication).subscribe(
+            {
+                next: (data) => {
+                    this.notificationService.success("Success", "Successfully moved to screening");
+                    this.getJob();
+                },
+                error:  (err) => {
+                    this.notificationService.error("Error", err?.message ?? "Error in completing the screening")
+                }
+            }
+        );
+    }
 }

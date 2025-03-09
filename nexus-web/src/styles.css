@@ -135,3 +135,10 @@ body {
         left: 14px;
     }
 }
+
+.join-button {
+    background: #5746af;
+    color: white;
+    height: 100px;
+    width: 80px;
+}

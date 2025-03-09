@@ -64,9 +64,20 @@
                     </div>
                 </div>
                 <div class="interviews-section rounded">
-                    <div style="display: flex; flex-direction: column; align-items: center; color: #666;">
+                    <div *ngIf="jobApplication?.applicationStatus === null || jobApplication?.applicationStatus !== 0" style="display: flex; flex-direction: column; align-items: center; color: #666;">
                         <img width="80px" src="..\assets\empty-box.svg">
                         <p>No interviews scheduled yet</p>
+                    </div>
+                    <h5 *ngIf="jobApplication?.applicationStatus === 0" class="mb-3">Upcoming Interviews</h5>
+                    <div *ngIf="jobApplication?.applicationStatus === 0" class="interviews-list gap-3 d-flex flex-column">
+                        <div class="interview-card border p-3 rounded">
+                            <div>
+                                <div class="">{{ job.departmentName }}</div>
+                                <p class="interview-text">{{ job.companyName }}</p>
+                                <p class="interview-text">AI Interview Screening</p>
+                            </div>
+                            <button (click)="openScreeningWindow()" class="join-button border rounded w-25 h-100">Join</button>
+                        </div>
                     </div>
                 </div>
             </div>
