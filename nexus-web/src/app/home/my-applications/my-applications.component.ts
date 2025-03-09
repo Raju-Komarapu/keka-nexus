@@ -22,13 +22,6 @@ interface Interview {
     .applications-container {
       margin: 0 auto;
     }
-
-    .join-button {
-        background: #5746af;
-        color: white;
-        height: 100px;
-        width: 80px;
-    }
     
     .tabs {
       margin-bottom: 20px;

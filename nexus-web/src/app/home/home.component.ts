@@ -12,13 +12,16 @@ import { NgIf } from '@angular/common';
   imports: [TopNavComponent, RouterModule, NgIf]
 })
 export class HomeComponent implements OnInit {
-    isContextInitilized: boolean;
+    isContextInitialized: boolean;
     constructor(private contextService: ContextService,
                 private authService: AuthService) {}
     
     ngOnInit(): void {
-       if (this.authService.hasToken()) {
-           this.contextService.initialize().then(() => this.isContextInitilized = true);
+       if (this.authService.isLoggedIn()) {
+           this.contextService.initialize().then(() => this.isContextInitialized = true);
+       }
+       else {
+            this.isContextInitialized = true;
        }
     }
 }

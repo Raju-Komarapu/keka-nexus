@@ -35,6 +35,9 @@ export class JobComponent implements OnInit {
 	applicationStatus = ApplicationStatus.getAll();
 	jobApplicationLogs: any = [];
 
+    private screeningUrl="https://tharungade.in";
+    screeningQuestionsWindow: Window;
+
 	mentors: Mentor[] = [
 		{
 			name: 'Vinod Kumar',
@@ -180,49 +183,7 @@ export class JobComponent implements OnInit {
 		const modalRef = this.ModalService.show(JobAppliedConfirmation, config);
 		modalRef.content.sendConfirmation.subscribe((data: boolean) => {
 			if(data) {
-				if (this.authService.isLoggedIn()){
-					this.jobApplication.applicationStatus = ApplicationStatus.Screening;
-					this.jobApplicationService.updateJobApplicationStatus(this.jobApplication).subscribe(
-						{
-							next: (data) => {
-								this.notificationService.success("Success", "Successfully moved to screening");
-								this.getJob();
-							},
-							error:  (err) => {
-								this.notificationService.error("Error", err?.message ?? "Error in completing the screening")
-							}
-						}
-					);
-				} else {
-					let jobApplication = {
-						"jobId": this.jobId,
-						"tenantId": this.job.tenantId,
-						"applicationStatus": ApplicationStatus.New,
-						"ApplicationStatusLog": [ {
-							"status": 0,
-							"isCompleted": true,
-							"completedOn": "2025-03-09T06:48:47.5703593Z"
-						}, 
-						{
-							"status": 1,
-							"isCompleted": true,
-							"completedOn": "2025-03-09T06:48:47.5703593Z"
-						}]
-					};
-					this.jobApplication = jobApplication;
-					this.jobApplication.applicationStatus = 1;
-					this.jobApplicationLogs = [ {
-						"status": 0,
-						"isCompleted": true,
-						"completedOn": "2025-03-09T06:48:47.5703593Z"
-					}, 
-					{
-						"status": 1,
-						"isCompleted": true,
-						"completedOn": "2025-03-09T06:48:47.5703593Z"
-					}];
-					this.notificationService.success("Success", "Successfully completed the screening");
-				}
+				this.onAiScreeningComplete();
 			}
 		});
 	}
@@ -262,4 +223,66 @@ export class JobComponent implements OnInit {
 		};
 		this.ModalService.show(AIChatbotComponent, config);
 	}
+
+    openScreeningWindow() {
+        const windowFeature = 'width=1200,height=800,left=200,top=200';
+        this.screeningQuestionsWindow = window.open(this.screeningUrl, '', windowFeature);
+        this.checkWindowStatus();
+      }
+  
+    checkWindowStatus() {
+        console.log(this.screeningQuestionsWindow);
+        if (!this.screeningQuestionsWindow.closed) {
+            setTimeout(() => { this.checkWindowStatus(); }, 100);
+        } else {
+            this.onAiScreeningComplete();
+        }
+    }
+
+    onAiScreeningComplete() {
+        if(this.authService.isLoggedIn()) {
+            this.jobApplication.applicationStatus = ApplicationStatus.Screening;
+            this.jobApplicationService.updateJobApplicationStatus(this.jobApplication).subscribe(
+                {
+                    next: (data) => {
+                        this.notificationService.success("Success", "Successfully moved to screening");
+                        this.getJob();
+                    },
+                    error:  (err) => {
+                        this.notificationService.error("Error", err?.message ?? "Error in completing the screening")
+                    }
+                }
+            );
+        }
+        else {
+            let jobApplication = {
+                "jobId": this.jobId,
+                "tenantId": this.job.tenantId,
+                "applicationStatus": ApplicationStatus.New,
+                "ApplicationStatusLog": [ {
+                    "status": 0,
+                    "isCompleted": true,
+                    "completedOn": "2025-03-09T06:48:47.5703593Z"
+                }, 
+                {
+                    "status": 1,
+                    "isCompleted": true,
+                    "completedOn": "2025-03-09T06:48:47.5703593Z"
+                }]
+            };
+            this.jobApplication = jobApplication;
+            this.jobApplication.applicationStatus = 1;
+            this.jobApplicationLogs = [ {
+                "status": 0,
+                "isCompleted": true,
+                "completedOn": "2025-03-09T06:48:47.5703593Z"
+            }, 
+            {
+                "status": 1,
+                "isCompleted": true,
+                "completedOn": "2025-03-09T06:48:47.5703593Z"
+            }];
+            this.notificationService.success("Success", "Successfully completed the screening");
+        }
+    }
 }
