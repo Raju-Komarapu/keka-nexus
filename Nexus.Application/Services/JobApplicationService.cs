@@ -18,7 +18,10 @@ public class JobApplicationService(IRequestContext requestContext, IMapper mappe
         }
 
         var jobApplication = mapper.Map<JobApplication>(jobApplicationDto);
-        jobApplication.ApplicationStatusLog = new List<ApplicationStatusLog> { new ApplicationStatusLog() { Status = ApplicationStatus.New, IsCompleted = true, CompletedOn = DateTime.UtcNow} };
+        jobApplication.ApplicationStatusLog = new List<ApplicationStatusLog> { 
+                                                    new ApplicationStatusLog() { Status = ApplicationStatus.New, IsCompleted = true, CompletedOn = DateTime.UtcNow},
+                                                    new ApplicationStatusLog() { Status = ApplicationStatus.Screening, IsCompleted = true, CompletedOn = DateTime.UtcNow}
+                                                };
         jobApplication.ProfileId = this.RequestContext.ProfileId;
         jobApplication.ApplicationStatus = ApplicationStatus.New;
         return jobApplicationRepository.AddJobApplication(jobApplication) != 0;

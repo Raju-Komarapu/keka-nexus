@@ -35,7 +35,7 @@ export class JobComponent implements OnInit {
 	applicationStatus = ApplicationStatus.getAll();
 	jobApplicationLogs: any = [];
 
-    private screeningUrl="https://tharungade.in";
+    private screeningUrl="https://interview.screeners.ai/signin/67b2e10f60c1598cdd873d14";
     screeningQuestionsWindow: Window;
 
 	mentors: Mentor[] = [
@@ -156,7 +156,6 @@ export class JobComponent implements OnInit {
 						this.notificationService.error("Error", "Error in applying for job");
 						return;
 					}
-					this.notificationService.success("Success", "Successfully applied for job");
 					this.getJob();
 					this.openJobAppliedConfirmation();
 				},
