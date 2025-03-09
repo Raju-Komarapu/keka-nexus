@@ -2,6 +2,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { marked } from 'marked';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NotificationService } from '../../services/notification.service';
 
@@ -9,7 +10,12 @@ import { NotificationService } from '../../services/notification.service';
     selector: 'app-ai-chatbot',
     templateUrl: './ai-chatbot.component.html',
     standalone: true,
-    imports: [CommonModule, FormsModule, NgFor, NgIf]
+    imports: [CommonModule, FormsModule, NgFor, NgIf],
+    styles: [`
+    h3 {
+      font-size: 24px !important;
+    }
+    `]
 })
 export class AIChatbotComponent {
     private apiUrl = 'https://agent-prod.studio.lyzr.ai/v3/inference/chat/';
@@ -17,10 +23,10 @@ export class AIChatbotComponent {
 
     userMessage = '';
     suggestedQuestions = [
-      'How is the company culture?',
       'What are the working hours?',
       'What are the office locations?',
-      'What is the standard salary for an SDE II?'
+      'What is the standard salary for an SDE II?',
+      'How is the company culture?'
     ];
 
     questionAnswers: Array<string> = [];
@@ -73,6 +79,10 @@ export class AIChatbotComponent {
           }
         })
       }
+    }
+
+    getHtmlContent(markdownContent) {
+      return marked(markdownContent);
     }
   
     askQuestion(question: string) {

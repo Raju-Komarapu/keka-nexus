@@ -32,8 +32,8 @@ export class ApplicationStatus extends Enum {
     static Hired = 4;
     static Archived = 5;
     static 0 = 'Application submitted';
-    static 1 = 'Application under review';
-    static 2 = 'Interview';
-    static 3 = 'Offer letter';
+    static 1 = 'Application Review';
+    static 2 = 'Screening';
+    static 3 = 'Interview';
     static 4 = 'Hired';
 }
