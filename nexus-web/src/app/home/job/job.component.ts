@@ -159,7 +159,15 @@ export class JobComponent implements OnInit {
 			});
 		}
 		else {
-			this.router.navigate(['./login']);
+			let jobApplication = {
+				"jobId": this.jobId,
+				"tenantId": this.job.tenantId,
+				"applicationStatus": ApplicationStatus.New,
+				"applicationStatusLog": [{"status": ApplicationStatus.New, "isCompleted": true, "CompletedOn": "2025/03/09"}]
+			};
+			this.jobApplication = jobApplication;
+			this.jobApplicationLogs = this.jobApplication.applicationStatusLog
+			this.openJobAppliedConfirmation();
 		}
 	}
 
@@ -172,20 +180,55 @@ export class JobComponent implements OnInit {
 		const modalRef = this.ModalService.show(JobAppliedConfirmation, config);
 		modalRef.content.sendConfirmation.subscribe((data: boolean) => {
 			if(data) {
-				this.jobApplication.applicationStatus = ApplicationStatus.Screening;
-				this.jobApplicationService.updateJobApplicationStatus(this.jobApplication).subscribe(
-					{
-						next: (data) => {
-							this.notificationService.success("Success", "Successfully moved to screening");
-							this.getJob();
-						},
-						error:  (err) => {
-							this.notificationService.error("Error", err?.message ?? "Error in completing the screening")
+				if (this.authService.isLoggedIn()){
+					this.jobApplication.applicationStatus = ApplicationStatus.Screening;
+					this.jobApplicationService.updateJobApplicationStatus(this.jobApplication).subscribe(
+						{
+							next: (data) => {
+								this.notificationService.success("Success", "Successfully moved to screening");
+								this.getJob();
+							},
+							error:  (err) => {
+								this.notificationService.error("Error", err?.message ?? "Error in completing the screening")
+							}
 						}
-					}
-				);
+					);
+				} else {
+					let jobApplication = {
+						"jobId": this.jobId,
+						"tenantId": this.job.tenantId,
+						"applicationStatus": ApplicationStatus.New,
+						"ApplicationStatusLog": [ {
+							"status": 0,
+							"isCompleted": true,
+							"completedOn": "2025-03-09T06:48:47.5703593Z"
+						}, 
+						{
+							"status": 1,
+							"isCompleted": true,
+							"completedOn": "2025-03-09T06:48:47.5703593Z"
+						}]
+					};
+					this.jobApplication = jobApplication;
+					this.jobApplication.applicationStatus = 1;
+					this.jobApplicationLogs = [ {
+						"status": 0,
+						"isCompleted": true,
+						"completedOn": "2025-03-09T06:48:47.5703593Z"
+					}, 
+					{
+						"status": 1,
+						"isCompleted": true,
+						"completedOn": "2025-03-09T06:48:47.5703593Z"
+					}];
+					this.notificationService.success("Success", "Successfully completed the screening");
+				}
 			}
 		});
+	}
+
+	openTopmate() {
+		window.open('https://topmate.io/', '_blank');
 	}
 
 	goBack() {

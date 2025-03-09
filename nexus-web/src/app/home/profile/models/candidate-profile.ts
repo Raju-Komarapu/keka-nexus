@@ -16,6 +16,7 @@ export class CandidateProfile {
     experience: Experience[];
     education: Education[];
     resumeLocation: string;
+    isProfileUpdated: boolean;
 
     constructor(args: any) {
         this.id = args.id;
@@ -33,6 +34,7 @@ export class CandidateProfile {
         this.experience = args.experience ? args.experience.map(exp => new Experience(exp)) : [];
         this.education = args.education ? args.education.map(edu => new Education(edu)) : [];
         this.resumeLocation = args.resumeLocation ?? null;
+        this.isProfileUpdated = args.isProfileUpdated;
     }
 }
 

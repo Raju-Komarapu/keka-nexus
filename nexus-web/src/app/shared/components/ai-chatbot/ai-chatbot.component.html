@@ -13,8 +13,7 @@
       <div style="display: flex;flex-direction: column;" class="h-75">
         <div style="flex-grow: 1; overflow-y: scroll;">
           <div class="px-2 py-2 m-2 rounded" [ngClass]="isOdd ? 'me-auto bg-light' : 'ms-auto border rounded'" *ngFor="let questionAnswer of questionAnswers; odd as isOdd"
-                style="max-width: 70%; margin-bottom: 15px;">
-            {{questionAnswer}}
+                style="max-width: 70%; margin-bottom: 15px;" [innerHtml]="getHtmlContent(questionAnswer)">
           </div>
         </div>
       </div>
