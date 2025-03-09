@@ -267,7 +267,8 @@ export class EditProfileComponent implements OnInit {
             candidateProfile.email = this.candidateProfile.email;
             candidateProfile.phone = candidateProfile.phone.toString();
             this.candidateProfileService.updateCandidateDetails(this.contextService.getUser().profileId, candidateProfile).subscribe({
-                next: (data) => {
+                next: async (data) => {
+                    await this.contextService.initialize();
                     this.onClose.emit(true);
                 },
                 error: (error) => {
