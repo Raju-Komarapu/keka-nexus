@@ -92,6 +92,10 @@ export class JobComponent implements OnInit {
 		this.user = this.contextService.getUser(); 
 	}
 
+    get hasAIScreening() {
+        return this.jobApplication?.applicationStatus === ApplicationStatus.New || this.jobApplication?.applicationStatus === ApplicationStatus.Screening;
+    }
+
 	getJob() {
 		this.route.paramMap.subscribe(params => {
 			this.jobId = params.get('jobId');
