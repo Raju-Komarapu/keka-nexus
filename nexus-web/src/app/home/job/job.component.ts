@@ -143,7 +143,7 @@ export class JobComponent implements OnInit {
 			var jobApplication = {
 				"jobId": this.jobId,
 				"tenantId": this.job.tenantId,
-				"applicationStatus": ApplicationStatus.New,
+				"applicationStatus": ApplicationStatus.Screening,
 				"ApplicationStatusLog": []
 			};
 			this.jobApplicationService.addJobApplications(jobApplication).subscribe({
@@ -165,8 +165,8 @@ export class JobComponent implements OnInit {
 			let jobApplication = {
 				"jobId": this.jobId,
 				"tenantId": this.job.tenantId,
-				"applicationStatus": ApplicationStatus.New,
-				"applicationStatusLog": [{"status": ApplicationStatus.New, "isCompleted": true, "CompletedOn": "2025/03/09"}]
+				"applicationStatus": ApplicationStatus.Screening,
+				"applicationStatusLog": [{"status": ApplicationStatus.New, "isCompleted": true, "CompletedOn": "2025/03/09"}, {"status": ApplicationStatus.Screening, "isCompleted": true, "CompletedOn": "2025/03/09"}]
 			};
 			this.jobApplication = jobApplication;
 			this.jobApplicationLogs = this.jobApplication.applicationStatusLog
@@ -241,7 +241,7 @@ export class JobComponent implements OnInit {
 
     onAiScreeningComplete() {
         if(this.authService.isLoggedIn()) {
-            this.jobApplication.applicationStatus = ApplicationStatus.Screening;
+            this.jobApplication.applicationStatus = ApplicationStatus.Interview;
             this.jobApplicationService.updateJobApplicationStatus(this.jobApplication).subscribe(
                 {
                     next: (data) => {
@@ -258,7 +258,7 @@ export class JobComponent implements OnInit {
             let jobApplication = {
                 "jobId": this.jobId,
                 "tenantId": this.job.tenantId,
-                "applicationStatus": ApplicationStatus.New,
+                "applicationStatus": ApplicationStatus.Interview,
                 "ApplicationStatusLog": [ {
                     "status": 0,
                     "isCompleted": true,
@@ -268,10 +268,15 @@ export class JobComponent implements OnInit {
                     "status": 1,
                     "isCompleted": true,
                     "completedOn": "2025-03-09T06:48:47.5703593Z"
+                },
+				{
+                    "status": 2,
+                    "isCompleted": true,
+                    "completedOn": "2025-03-09T06:48:47.5703593Z"
                 }]
             };
             this.jobApplication = jobApplication;
-            this.jobApplication.applicationStatus = 1;
+            this.jobApplication.applicationStatus = 2;
             this.jobApplicationLogs = [ {
                 "status": 0,
                 "isCompleted": true,
@@ -281,7 +286,12 @@ export class JobComponent implements OnInit {
                 "status": 1,
                 "isCompleted": true,
                 "completedOn": "2025-03-09T06:48:47.5703593Z"
-            }];
+            },
+			{
+				"status": 2,
+				"isCompleted": true,
+				"completedOn": "2025-03-09T06:48:47.5703593Z"
+			}];
             this.notificationService.success("Success", "Successfully completed the screening");
         }
     }
