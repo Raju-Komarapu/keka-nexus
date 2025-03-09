@@ -23,10 +23,10 @@ export class AIChatbotComponent {
 
     userMessage = '';
     suggestedQuestions = [
-      'How is the company culture?',
       'What are the working hours?',
       'What are the office locations?',
-      'What is the standard salary for an SDE II?'
+      'What is the standard salary for an SDE II?',
+      'How is the company culture?'
     ];
 
     questionAnswers: Array<string> = [];
