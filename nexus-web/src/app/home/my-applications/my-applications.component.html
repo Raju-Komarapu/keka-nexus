@@ -17,7 +17,7 @@
                     *ngFor="let application of applications" style="cursor: pointer;">
                     <div style="display: flex; justify-content: space-between; align-items: start;">
                         <div>
-                            <h5>{{ application.job?.title }}</h5>
+                            <h5 class="text-capitalize">{{ application.job?.title }}</h5>
                             <p>{{ application.job?.companyName }} • {{ getJobLocations(application.job) }} • {{
                                 application.job?.experience }}</p>
                         </div>
