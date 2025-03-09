@@ -13,7 +13,7 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class AIChatbotComponent {
     private apiUrl = 'https://agent-prod.studio.lyzr.ai/v3/inference/chat/';
-    private apiKey = 'sk-default-fNcnzGyU885QaDjfRHPIOqFzP3YKkARo';
+    private apiKey = 'sk-default-GvhlMCJd0dWOcB40Y3r9C40ciW7N4Jps';
 
     userMessage = '';
     suggestedQuestions = [
@@ -45,10 +45,10 @@ export class AIChatbotComponent {
 
         let data = 
         {
-          "user_id": "tharungade2001@gmail.com",
+          "user_id": "kvinodkumar.091292@gmail.com",
           "system_prompt_variables": {},
-          "agent_id": "67cc146d4f4888a85278cf68",
-          "session_id": "67cc146d4f4888a85278cf68",
+          "agent_id": "67cd20ae4f4888a85278dcec",
+          "session_id": "67cd20ae4f4888a85278dcec",
           "message": this.userMessage
         };
 
