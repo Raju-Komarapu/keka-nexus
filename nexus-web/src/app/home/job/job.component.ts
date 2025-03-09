@@ -152,7 +152,6 @@ export class JobComponent implements OnInit {
 						this.notificationService.error("Error", "Error in applying for job");
 						return;
 					}
-					this.notificationService.success("Success", "Successfully applied for job");
 					this.getJob();
 					this.openJobAppliedConfirmation();
 				},
