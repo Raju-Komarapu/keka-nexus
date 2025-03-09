@@ -92,6 +92,10 @@ export class JobComponent implements OnInit {
 		this.user = this.contextService.getUser(); 
 	}
 
+    get hasAIScreening() {
+        return this.jobApplication?.applicationStatus === ApplicationStatus.New || this.jobApplication?.applicationStatus === ApplicationStatus.Screening;
+    }
+
 	getJob() {
 		this.route.paramMap.subscribe(params => {
 			this.jobId = params.get('jobId');
@@ -143,7 +147,7 @@ export class JobComponent implements OnInit {
 			var jobApplication = {
 				"jobId": this.jobId,
 				"tenantId": this.job.tenantId,
-				"applicationStatus": ApplicationStatus.New,
+				"applicationStatus": ApplicationStatus.Screening,
 				"ApplicationStatusLog": []
 			};
 			this.jobApplicationService.addJobApplications(jobApplication).subscribe({
@@ -241,7 +245,7 @@ export class JobComponent implements OnInit {
 
     onAiScreeningComplete() {
         if(this.authService.isLoggedIn()) {
-            this.jobApplication.applicationStatus = ApplicationStatus.Screening;
+            this.jobApplication.applicationStatus = ApplicationStatus.Interview;
             this.jobApplicationService.updateJobApplicationStatus(this.jobApplication).subscribe(
                 {
                     next: (data) => {
