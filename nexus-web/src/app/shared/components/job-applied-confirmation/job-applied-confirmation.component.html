@@ -6,11 +6,15 @@
         </div>
     </div>
     <div class="modal-body">
-        <div class="d-flex justify-content-center" style="margin-bottom: 16px;">
+        <div *ngIf="!isRequestInProgress" class="d-flex justify-content-center" style="margin-bottom: 16px;">
             <i class="ph ph-check-circle fs-1" style="color: #198754;"></i>
         </div>
-        <p class="text-center">Awsome! you can complete the screening interview now</p>
-        <div class="d-flex justify-content-center" style="padding-bottom: 16px;">
+        <div class="d-flex justify-content-center">
+            <img *ngIf="isRequestInProgress" width="120px" src="..\assets\application-submit-loader.gif">
+        </div>
+        <p class="text-center m-0">{{processSteps[processStepIndex]}}</p>
+        <p *ngIf="!isRequestInProgress" class="text-secondary small text-center">Take your AI-based screening now — no more waiting for days or weeks!</p>
+        <div *ngIf="!isRequestInProgress" class="d-flex justify-content-center" style="padding-bottom: 16px;">
             <button (click)="openScreeningWindow()" class="btn border">Complete AI Screening Interview</button>
         </div>
     </div>
