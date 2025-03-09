@@ -221,7 +221,7 @@ export class JobComponent implements OnInit {
 						"isCompleted": true,
 						"completedOn": "2025-03-09T06:48:47.5703593Z"
 					}];
-					this.notificationService.success("Success", "Successfully moved to screening");
+					this.notificationService.success("Success", "Successfully completed the screening");
 				}
 			}
 		});

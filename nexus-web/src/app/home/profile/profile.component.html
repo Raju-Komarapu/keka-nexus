@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="session-button" (click)="editMode = true">Edit profile</button>
+                    <button class="session-button" (click)="editMode = true">{{ candidateProfile.isProfileUpdated ? 'Edit' : 'Complete profile' }}</button>
                 </div>
             </div>
         </div>
