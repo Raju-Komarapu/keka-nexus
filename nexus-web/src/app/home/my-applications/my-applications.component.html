@@ -44,7 +44,7 @@
                             <p>{{ interview.company }}</p>
                             <p>{{ interview.date }} • {{ interview.time }} • {{ interview.platform }}</p>
                         </div>
-                        <button class="join-button border rounded w-25 h-100">Join</button>
+                        <button class="join-button border rounded w-25 h-100" (click)="openMeet()">Join</button>
                     </div>
                 </div>
                 <div *ngIf="!applications?.length || !interviews?.length"

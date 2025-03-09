@@ -63,14 +63,14 @@ export class MyApplicationsComponent {
         {
             company: 'Tech lead',
             position: 'Senior Software Engineer',
-            date: 'Jul 18',
+            date: 'Mar 18',
             time: '9:30am - 10:30am',
             platform: 'Google meet'
         },
         {
-            company: 'Tech lead',
+            company: 'Google',
             position: 'Principle Software Engineer',
-            date: 'Jul 20',
+            date: 'March 20',
             time: '2:30pm - 3:30pm',
             platform: 'Google meet'
         }
@@ -104,6 +104,10 @@ export class MyApplicationsComponent {
             });
             this.isLoaded = true;
         });
+    }
+
+    openMeet() {
+        window.open('https://meet.google.com/', '_blank')
     }
 
     getApplicationStatus(status) {
