@@ -8,12 +8,9 @@
                     <div class="job-title">{{ job.title }}</div>
                 </div>
                 <div>
-                    <div *ngIf="user?.isProfileUpdated">
+                    <div>
                         <div *ngIf="!jobApplication" class="rounded d-flex justify-content-center align-items-center" style="width: 100px; height: 36px; background: #5746af; color: white; cursor: pointer;" (click)="applyJob()">Apply Job</div>
                         <div *ngIf="jobApplication" class="border border-success rounded d-flex justify-content-center align-items-center" style="width: 100px; height: 36px; border: 1px; color: #198754;">Applied</div>
-                    </div>
-                    <div  *ngIf="!user?.isProfileUpdated">
-                        <a  href="#/home/profile" *ngIf="jobApplication" class="rounded d-flex justify-content-center align-items-center" style="width: 120px; height: 36px; border: 1px solid #5746AF; color: #5746AF; text-decoration: none; cursor: pointer;">Complete Profile</a>
                     </div>
                 </div>
             </div>
