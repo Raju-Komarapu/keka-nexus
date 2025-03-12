@@ -10,7 +10,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
-import { EditProfileComponent } from './home/profile/components/edit-profile/edit-profile.component';
+import { LoaderInterceptor } from './shared/interceptors/loader.intercepter';
 
 @NgModule({
     declarations: [
@@ -30,7 +30,8 @@ import { EditProfileComponent } from './home/profile/components/edit-profile/edi
         HttpClientModule
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })
