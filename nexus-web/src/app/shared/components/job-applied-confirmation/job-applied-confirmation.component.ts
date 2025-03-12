@@ -48,7 +48,6 @@ export class JobAppliedConfirmation implements OnInit{
     }
 
     checkWindowStatus() {
-      console.log(this.screeningQuestionsWindow);
       if (!this.screeningQuestionsWindow.closed) {
           setTimeout(() => { this.checkWindowStatus(); }, 100);
       } else {
