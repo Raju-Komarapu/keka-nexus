@@ -1,4 +1,4 @@
-<div class="container p-0">
+<div class="container p-0" style="height: 243px;">
     <div class="modal-header border-0 d-flex align-items-center justify-content-between">
         <div></div>
         <div style="cursor: pointer;" (click)="closeModal()">
@@ -10,12 +10,12 @@
             <i class="ph ph-check-circle fs-1" style="color: #198754;"></i>
         </div>
         <div class="d-flex justify-content-center">
-            <img *ngIf="isRequestInProgress" width="120px" src="..\assets\application-submit-loader.gif">
+            <img *ngIf="isRequestInProgress" width="80px" src="..\assets\loader-infinity.gif">
         </div>
         <p class="text-center m-0">{{processSteps[processStepIndex]}}</p>
         <p *ngIf="!isRequestInProgress" class="text-secondary small text-center">Take your AI-based screening now — no more waiting for days or weeks!</p>
         <div *ngIf="!isRequestInProgress" class="d-flex justify-content-center" style="padding-bottom: 16px;">
-            <button (click)="openScreeningWindow()" class="btn border">Complete AI Screening Interview</button>
+            <button (click)="openScreeningWindow()" class="btn" style="width: 256px; height: 38px; color: #ffffff; border: 1px solid #5746af; background-color: #5746af;">Complete AI Screening Interview</button>
         </div>
     </div>
 </div>
