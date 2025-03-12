@@ -52,10 +52,8 @@ export class JobAppliedConfirmation implements OnInit{
           setTimeout(() => { this.checkWindowStatus(); }, 100);
       } else {
         this.isRequestInProgress = true;
-        setTimeout(() => {
           this.sendConfirmation.emit(true);
           this.closeModal();
-        }, 2000);
       }
     }
 
