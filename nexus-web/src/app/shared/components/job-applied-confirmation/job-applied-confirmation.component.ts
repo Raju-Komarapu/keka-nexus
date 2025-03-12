@@ -10,7 +10,7 @@ import { NotificationService } from '../../services/notification.service';
     imports: [NgIf]
 })
 export class JobAppliedConfirmation implements OnInit{
-    private screeningUrl="https://interview.screeners.ai/signin/67b2e10f60c1598cdd873d14";
+  private screeningUrl="https://interview.screeners.ai/signin/67b2e10f60c1598cdd873d14";
     screeningQuestionsWindow: Window;
     isRequestInProgress: boolean;
     processStepIndex: number;
@@ -52,8 +52,11 @@ export class JobAppliedConfirmation implements OnInit{
       if (!this.screeningQuestionsWindow.closed) {
           setTimeout(() => { this.checkWindowStatus(); }, 100);
       } else {
+        this.isRequestInProgress = true;
+        setTimeout(() => {
           this.sendConfirmation.emit(true);
           this.closeModal();
+        }, 2000);
       }
     }
 
